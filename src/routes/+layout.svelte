@@ -54,4 +54,18 @@
 	:global(a:active) {
 		color: var(--brand-500);
 	}
+	:global(button){
+		height: 40px;
+		width: 100px;
+		border-radius: 0;
+		border: 1px solid var(--brand-500);
+		background-color: var(--neutral-500);
+		color: var(--brand-500);
+		font-size: 1.25rem;
+		cursor: pointer;
+	}
+	:global(button:focus), :global(button:hover), :global(button:active){
+		background-color: var(--brand-500);
+		color: var(--neutral-500);
+	}
 </style>
