@@ -18,11 +18,6 @@
 		src: url('/fonts/JetBrainsMono-Regular.woff2') format(woff2);
 		font-display: swap;
 	}
-	:global(body) {
-		font-family: 'JetBrainsMono-Regular';
-		margin: 0;
-		min-height: 100vh;
-	}
 	:root {
 		scrollbar-width: none;
 
@@ -42,7 +37,13 @@
 		--neutral-500: oklch(0.174 0.0287 289.62);
 		--neutral-700: oklch(0.12 0.02 289.62);
 		--neutral-900: oklch(0.08 0.015 289.62);
-
+	}
+	:global(body) {
+		font-family: 'JetBrainsMono-Regular';
+		margin: 0;
+	}
+	div{
+		min-height: 100vh;
 		background-color: var(--neutral-700);
 	}
 	:global(p),
@@ -78,8 +79,8 @@
 		font-weight: 600;
 		cursor: pointer;
 	}
-	:global(button:focus), :global(button:hover), :global(button:active){
+	/*:global(button:focus), :global(button:hover), :global(button:active){
 		background-color: var(--brand-500);
 		color: var(--neutral-500);
-	}
+	}*/
 </style>
