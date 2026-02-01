@@ -62,14 +62,20 @@
 	:global(a:active) {
 		color: var(--brand-500);
 	}
+	:global(.buttonContainer){
+		width: fit-content;
+		border: 2px solid var(--brand-500);
+		border-radius: 8px;
+	}
 	:global(button){
 		height: 40px;
 		width: 100px;
-		border-radius: 0;
-		border: 1px solid var(--brand-500);
-		background-color: var(--neutral-500);
-		color: var(--brand-500);
+		border: 3px solid var(--neutral-500);
+		border-radius: 6px; /*NOTE: 2px less than .buttonContainer*/
+		background-color: var(--brand-500);
+		color: var(--neutral-550);
 		font-size: 1.25rem;
+		font-weight: 600;
 		cursor: pointer;
 	}
 	:global(button:focus), :global(button:hover), :global(button:active){
