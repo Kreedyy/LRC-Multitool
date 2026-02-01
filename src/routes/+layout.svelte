@@ -52,7 +52,7 @@
 		min-height: 100vh;
 		background-color: var(--neutral-700);
 	}
-	header{
+	header {
 		display: flex;
 		justify-content: space-between;
 	}
@@ -101,7 +101,7 @@
 	}
 	:global(button:focus),
 	:global(button:hover),
-	:global(button:active){
+	:global(button:active) {
 		background-color: var(--brand-500);
 		color: var(--neutral-500);
 		fill: var(--neutral-550);
