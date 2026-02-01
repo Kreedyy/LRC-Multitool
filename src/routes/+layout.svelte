@@ -8,7 +8,9 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-{@render children()}
+<div>
+	{@render children()}
+</div>
 
 <style>
 	@font-face {
@@ -18,6 +20,8 @@
 	}
 	:global(body) {
 		font-family: 'JetBrainsMono-Regular';
+		margin: 0;
+		min-height: 100vh;
 	}
 	:root {
 		scrollbar-width: none;
@@ -44,6 +48,10 @@
 	:global(p),
 	:global(h2) {
 		color: var(--neutral-100);
+		margin: 0;
+	}
+	:global(h1){
+		margin: 0;
 	}
 	:global(h1),
 	:global(a),
