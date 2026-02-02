@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AudioPlayer from '$lib/assets/AudioPlayer.svelte';
 	import favicon from '$lib/assets/favicon.svg';
 	import KreedyDev from '$lib/assets/KreedyDev.svelte';
 	import Nav from '$lib/assets/Nav.svelte';
@@ -17,6 +18,7 @@
 	</header>
 	<main>
 		{@render children()}
+		<AudioPlayer />
 	</main>
 </div>
 
