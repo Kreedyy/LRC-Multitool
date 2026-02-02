@@ -330,15 +330,5 @@
 		*/
 	}
 	@media only screen and (max-width: 800px){
-		.player{
-			display: grid;
-			grid-template-rows: 1fr 1fr;
-		}
-		.player *{
-			grid-row: 1;
-		}
-		.bar{
-			grid-row: 2;
-		}
 	}
 </style>
