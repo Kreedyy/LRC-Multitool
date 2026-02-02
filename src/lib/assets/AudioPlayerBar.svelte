@@ -56,6 +56,8 @@
 		display: flex;
 		border: 0;
 		cursor: pointer;
+		margin-left: 0.5rem;
+		margin-right: 0.5rem;
 	}
 	svg {
 		width: 35px;
