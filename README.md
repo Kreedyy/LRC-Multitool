@@ -1,16 +1,15 @@
-# TODO
+# LRC Creator
+Web alternative to [LRCGET](https://github.com/tranxuanthang/lrcget), inspired by [https://github.com/magic-akari/lrc-maker](https://github.com/magic-akari/lrc-maker)
+
+## TODO
 
 Uploading files  
 Lyric editing  
 Functionality with lrclib API
 
-# Considered Features
+## Considered Features
 
 Importing audio from Youtube and Soundcloud
-
----
-
-Web alternative to [LRCGET](https://github.com/tranxuanthang/lrcget), inspired by [https://github.com/magic-akari/lrc-maker](https://github.com/magic-akari/lrc-maker)
 
 ## Prerequisites
 
