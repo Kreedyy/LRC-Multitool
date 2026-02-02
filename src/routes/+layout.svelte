@@ -19,7 +19,7 @@
 	<main>
 		{@render children()}
 	</main>
-  <AudioPlayerBar />
+	<AudioPlayerBar />
 </div>
 
 <style>
