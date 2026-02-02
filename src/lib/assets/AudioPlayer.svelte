@@ -128,7 +128,10 @@
 			bind:value={currentTime}
 			oninput={handleSeek}
 		/>
-		<p class="speedText" onclick={() => speed = 1}>{speed.toFixed(2)}x</p>
+		<button class="speedButton" onclick={() => speed = 1}>
+			<p class="speedText">{speed.toFixed(2)}x</p>
+		</button>
+		
 		<RangeInput
 			class="speed"
 			min={0.25}
@@ -238,11 +241,19 @@
 		margin-left: 0.5rem;
 		display: flex;
 		align-items: center;
-		min-width: 255px;
 	}
 	:global(.speed) {
 		min-width: 75px;
 		width: 75px;
+	}
+	.speedButton{
+		background: none;
+		border: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 1rem;
+		font-family: 'JetBrainsMono-Regular';
 	}
 	.speedText{
 		cursor: pointer;
@@ -258,10 +269,6 @@
 		padding-top: 45px;
 		*/
 	}
-	/*
 	@media only screen and (max-width: 800px){
-		.player{
-			flex-wrap: wrap;
-		}
-	}*/
+	}
 </style>
