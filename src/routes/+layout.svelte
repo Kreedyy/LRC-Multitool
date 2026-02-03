@@ -9,6 +9,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>LRC Creator</title>
 </svelte:head>
 
 <div>
