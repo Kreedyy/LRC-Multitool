@@ -11,11 +11,10 @@
 		showResults: boolean;
 	} = $props<{}>();
 
-	// $effect(() => {
-	// 	console.log(result);
-	// });
-	function setUserPick(getSynced: boolean, result: any) {
-		userPick = result;
+	let resultsContainer = $state<HTMLDivElement>();
+
+	function setUserPick(getSynced: boolean, item: any) {
+		userPick = item;
 		getSyncedLyrics = getSynced;
 	}
 
@@ -40,8 +39,21 @@
 show buttons for importing plain and synced lyrics or mark as instrumental if instrumental
 -->
 
-{#if result}
-	<div class="showResults">
+<!--Hides results if clicking outside of results or search input-->
+<svelte:document
+	onclick={(e) => {
+		if (
+			resultsContainer &&
+			!resultsContainer.contains(e.target as HTMLElement) &&
+			!document.getElementById('searchInput')?.contains(e.target as HTMLElement)
+		) {
+			showResults = false;
+		}
+	}}
+/>
+
+{#if result && showResults}
+	<div class="showResults" bind:this={resultsContainer}>
 		{#each result as item}
 			<div class="result">
 				<p>{item.trackName}</p>
@@ -58,7 +70,7 @@ show buttons for importing plain and synced lyrics or mark as instrumental if in
 							<button class="synced" onclick={() => setUserPick(true, item)}>Synced</button>
 						{/if}
 					{:else}
-						<p>(Instrumental)</p>
+						<span>Instrumental</span>
 					{/if}
 				</div>
 				<div class="album">
@@ -70,6 +82,12 @@ show buttons for importing plain and synced lyrics or mark as instrumental if in
 {/if}
 
 <style>
+	span{
+		display: flex;
+		align-items: center;
+		color: rgb(75 85 99);
+		background-color: rgb(209 213 219);
+	}
 	.lyricButtons {
 		display: flex;
 		gap: 0.5rem;
@@ -121,7 +139,8 @@ show buttons for importing plain and synced lyrics or mark as instrumental if in
 	}
 	.plain,
 	.synced,
-	.duration {
+	.duration,
+	span {
 		border-radius: 0.25rem;
 		padding-top: 0.125rem;
 		padding-bottom: 0.125rem;
