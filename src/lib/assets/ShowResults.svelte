@@ -15,6 +15,7 @@
 	let resultsContainer = $state<HTMLDivElement>();
 
 	function setUserPick(getSynced: boolean, item: any) {
+		showResults = false;
 		item.plainLyrics = formatLyrics(item?.plainLyrics);
 		item.syncedLyrics = formatLyrics(item?.syncedLyrics);
 		userPick = item;
