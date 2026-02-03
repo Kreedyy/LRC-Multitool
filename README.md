@@ -4,15 +4,13 @@ Web alternative to [LRCGET](https://github.com/tranxuanthang/lrcget), inspired b
 
 ## TODO
 
-1. Lyric editing  
+1. Lyric editing
 2. Functionality with LRCLIB API (GET /api/search param 'q' & POST)
 3. Only POST lyrics if fully plain or fully synced, if synced POST both plain & synced by removing timestamps
 4. Uploading files via YouTube and SoundCloud
 5. Add User-Agent header according to LRCLIB docs
 
 ## Considered Features
-
-
 
 ## Prerequisites
 
