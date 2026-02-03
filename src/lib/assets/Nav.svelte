@@ -1,9 +1,29 @@
 <script lang="ts">
+	import { page } from '$app/state';
+	import { onMount } from 'svelte';
+
 	let activeIcon: string | null = null;
 
 	function setActive(icon: string) {
 		activeIcon = icon;
 	}
+
+	function checkActive(pagePath: string | null) {
+		switch (pagePath) {
+			case '/lyrics':
+				return 'lyrics';
+			case '/settings':
+				return 'settings';
+			case '/sync':
+				return 'sync';
+			default:
+				return '';
+		}
+	}
+
+	onMount(() => {
+		setActive(checkActive(page.route.id)); //This just fills icon inside Nav if user navigates without pressing button :]
+	});
 </script>
 
 <nav>
@@ -69,7 +89,7 @@
 		padding-right: 0.75rem;
 	}
 	a {
-				color: var(--neutral-100);
+		color: var(--neutral-100);
 		fill: var(--neutral-100);
 		font-size: 1.25rem;
 		font-weight: 600;
@@ -92,23 +112,22 @@
 		color: var(--brand-500);
 		fill: var(--brand-500);
 	}
-		@media only screen and (max-width: 500px){
-			nav{
-						padding-top: 0.5rem;
-		padding-right: 0.5rem;
-			}
-					a{
-					height: 37.5px;
-		width: 37.5px;
+	@media only screen and (max-width: 500px) {
+		nav {
+			padding-top: 0.5rem;
+			padding-right: 0.5rem;
+		}
+		a {
+			height: 37.5px;
+			width: 37.5px;
 		}
 	}
-				@media only screen and (max-width: 440px){
-
+	@media only screen and (max-width: 440px) {
 	}
-			@media only screen and (max-width: 400px){
-		a{
-					height: 30px;
-		width: 30px;
+	@media only screen and (max-width: 400px) {
+		a {
+			height: 30px;
+			width: 30px;
 		}
 	}
 </style>

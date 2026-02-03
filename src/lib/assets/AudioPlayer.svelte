@@ -350,7 +350,7 @@
 		}
 	}
 	@media only screen and (max-width: 400px) {
-		.player{
+		.player {
 			justify-content: space-between;
 		}
 

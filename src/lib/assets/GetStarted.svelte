@@ -69,10 +69,10 @@
 	}
 
 	@media only screen and (max-width: 625px) {
-		.col{
+		.col {
 			font-size: 1rem;
 		}
-		.started{
+		.started {
 			font-size: 1.5rem;
 		}
 	}
