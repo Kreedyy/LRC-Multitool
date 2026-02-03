@@ -82,7 +82,7 @@ show buttons for importing plain and synced lyrics or mark as instrumental if in
 {/if}
 
 <style>
-	span{
+	span {
 		display: flex;
 		align-items: center;
 		color: rgb(75 85 99);

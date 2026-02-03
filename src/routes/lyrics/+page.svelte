@@ -11,9 +11,9 @@
 
 <div>
 	<!--Fetch results and assign to data-->
-	<LyricSearch bind:result bind:showResults/>
+	<LyricSearch bind:result bind:showResults />
 	<!--Showcase of results from data and handles user pick-->
-	<ShowResults bind:userPick bind:getSyncedLyrics {result} bind:showResults/>
+	<ShowResults bind:userPick bind:getSyncedLyrics {result} bind:showResults />
 	<!--Processes user pick by filling textarea with lyrics-->
 	<LyricBox {userPick} {getSyncedLyrics} />
 </div>
@@ -32,8 +32,8 @@
 		height: 75%;
 		max-height: 500px;
 	}
-	@media only screen and (max-width: 600px){
-		div{
+	@media only screen and (max-width: 600px) {
+		div {
 			padding-left: 1rem;
 			padding-right: 1rem;
 		}
