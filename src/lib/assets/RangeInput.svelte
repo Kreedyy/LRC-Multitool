@@ -80,11 +80,12 @@
 	.track-fill {
 		height: 100%;
 		background: var(--track-fill-color);
-    transition: left 0.05s ease-out;
+		transition: left 0.05s ease-out;
 	}
-  .track, .track-fill{
-    border-radius: 10px;
-  }
+	.track,
+	.track-fill {
+		border-radius: 10px;
+	}
 
 	.thumb {
 		position: absolute;
