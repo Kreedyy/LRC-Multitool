@@ -59,7 +59,10 @@ no synced lyrics -> return null
 		cursor: pointer;
 	}
 	label {
+		display: flex;
 		color: var(--neutral-100);
+		width: 100%;
+		justify-content: center;
 	}
 	.searchInput {
 		max-width: 208px;
