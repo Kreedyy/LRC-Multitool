@@ -2,11 +2,13 @@
 	let {
 		result = $bindable(),
 		userPick = $bindable(),
-		getSyncedLyrics = $bindable()
+		getSyncedLyrics = $bindable(),
+		showResults = $bindable()
 	}: {
 		result: any;
 		userPick: any;
 		getSyncedLyrics: boolean;
+		showResults: boolean;
 	} = $props<{}>();
 
 	// $effect(() => {

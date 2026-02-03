@@ -6,13 +6,14 @@
 	let result = $state<any>();
 	let userPick = $state<any>();
 	let getSyncedLyrics = $state<boolean>();
+	let showResults = $state<boolean>(false);
 </script>
 
 <div>
 	<!--Fetch results and assign to data-->
-	<LyricSearch bind:result />
+	<LyricSearch bind:result bind:showResults/>
 	<!--Showcase of results from data and handles user pick-->
-	<ShowResults bind:userPick bind:getSyncedLyrics {result} />
+	<ShowResults bind:userPick bind:getSyncedLyrics {result} bind:showResults/>
 	<!--Processes user pick by filling textarea with lyrics-->
 	<LyricBox {userPick} {getSyncedLyrics} />
 </div>

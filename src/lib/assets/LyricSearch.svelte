@@ -8,7 +8,7 @@ no synced lyrics -> return null
 -->
 
 <script lang="ts">
-	let { result = $bindable() } = $props();
+	let { result = $bindable(), showResults = $bindable() }: { result:any, showResults:boolean} = $props();
 
 	function reformatInput(input: string) {
 		let formattedInput: string = input.replace(/ /g, '+');
@@ -20,6 +20,13 @@ no synced lyrics -> return null
 
 		const response = await fetch(`/api/lyrics?q=${reformatInput(input)}`);
 		result = await response.json();
+		setShowResults();
+	}
+
+	function setShowResults() {
+		if (result && result.length > 0){
+			showResults = true;
+		}
 	}
 
 	let userSearch = $state<string>('');
@@ -28,7 +35,7 @@ no synced lyrics -> return null
 <div>
 	<label for="searchInput">Search track, artist or album</label>
 	<div class="input">
-		<input id="searchInput" class="searchInput" type="text" bind:value={userSearch} />
+		<input id="searchInput" class="searchInput" type="text" bind:value={userSearch} onclick={setShowResults}/>
 		<button onclick={() => search(userSearch)}>Search</button>
 	</div>
 </div>
