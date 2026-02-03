@@ -4,10 +4,10 @@ Web alternative to [LRCGET](https://github.com/tranxuanthang/lrcget), inspired b
 
 ## TODO
 
-Uploading files  
+Uploading files via YouTube and SoundCloud
 Lyric editing  
-Functionality with lrclib API (GET /api/search param 'q' & POST)
-Only POST lyrics if fully plain or fully synced, if synced POST both plain & synced
+Functionality with LRCLIB API (GET /api/search param 'q' & POST)
+Only POST lyrics if fully plain or fully synced, if synced POST both plain & synced by removing timestamps
 
 ## Considered Features
 
