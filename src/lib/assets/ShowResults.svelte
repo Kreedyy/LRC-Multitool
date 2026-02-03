@@ -40,35 +40,35 @@ show buttons for importing plain and synced lyrics or mark as instrumental if in
 
 {#if data}
 	<div class="showResults">
-	{#each data as result}
-		<div class="result">
-			<p>{result.trackName}</p>
-			<div class="lyricButtons">
-				<p class="duration">
-					{formatTime(result.duration)}
-				</p>
-				{#if result.plainLyrics || result.syncedLyrics}
-					<!--Checks if lyrics exist, if json returns null/undefined these will be false-->
-					{#if result.plainLyrics}
-						<button class="plain" onclick={() => setUserPick(false, result)}>Plain</button>
+		{#each data as result}
+			<div class="result">
+				<p>{result.trackName}</p>
+				<div class="lyricButtons">
+					<p class="duration">
+						{formatTime(result.duration)}
+					</p>
+					{#if result.plainLyrics || result.syncedLyrics}
+						<!--Checks if lyrics exist, if json returns null/undefined these will be false-->
+						{#if result.plainLyrics}
+							<button class="plain" onclick={() => setUserPick(false, result)}>Plain</button>
+						{/if}
+						{#if result.syncedLyrics}
+							<button class="synced" onclick={() => setUserPick(true, result)}>Synced</button>
+						{/if}
+					{:else}
+						<p>(Instrumental)</p>
 					{/if}
-					{#if result.syncedLyrics}
-						<button class="synced" onclick={() => setUserPick(true, result)}>Synced</button>
-					{/if}
-				{:else}
-					<p>(Instrumental)</p>
-				{/if}
+				</div>
+				<div class="album">
+					<p>{result.albumName} - {result.artistName}</p>
+				</div>
 			</div>
-			<div class="album">
-				<p>{result.albumName} - {result.artistName}</p>
-			</div>
-		</div>
-	{/each}
-</div>
+		{/each}
+	</div>
 {/if}
 
 <style>
-	.lyricButtons{
+	.lyricButtons {
 		display: flex;
 		gap: 0.5rem;
 	}
@@ -78,7 +78,7 @@ show buttons for importing plain and synced lyrics or mark as instrumental if in
 		gap: 1rem;
 		overflow: scroll;
 		position: fixed;
-		
+
 		border: 2px solid var(--brand-500);
 		border-radius: 0.25rem;
 		backdrop-filter: blur(3px);

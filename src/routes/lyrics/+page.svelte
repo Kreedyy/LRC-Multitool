@@ -26,7 +26,7 @@
 		align-items: center;
 		padding: 2rem;
 	}
-	:global(.showResults){
+	:global(.showResults) {
 		z-index: 2;
 		height: 75%;
 		max-height: 500px;

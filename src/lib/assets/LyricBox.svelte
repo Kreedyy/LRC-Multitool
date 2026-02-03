@@ -3,6 +3,17 @@
 		track = $bindable(),
 		getSyncedLyrics = $bindable()
 	}: { track: any; getSyncedLyrics: boolean } = $props<{}>();
+
+	let lyrics = $state<string>();
+
+	function setPlainOrSyncedLyrics(syncedLyrics: boolean) {
+		lyrics = syncedLyrics ? track.syncedLyrics : track.plainLyrics;
+	}
+	$effect(() => {
+		if (track) {
+			setPlainOrSyncedLyrics(getSyncedLyrics);
+		}
+	});
 	// Transform data here
 </script>
 
@@ -17,18 +28,7 @@
 .plainLyrics string
 .syncedLyrics
 -->
-
-{#if track != undefined}
-	{#if getSyncedLyrics}
-		<textarea>
-			{track.syncedLyrics}
-		</textarea>
-	{:else}
-		<textarea>
-			{track.plainLyrics}
-		</textarea>
-	{/if}
-{/if}
+<textarea bind:value={lyrics}> </textarea>
 
 <style>
 	textarea {
