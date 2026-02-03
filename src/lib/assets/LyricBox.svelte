@@ -1,13 +1,12 @@
 <script lang="ts">
-  let {
-    data
-  } = $props<{
-    data?: any;
-  }>();
+  let { data = $bindable() }: { data: any } = $props<{}>();
+  $effect(() => {
+    console.log(data);
+  })
 </script>
 
 <textarea>
-  
+{data}
 </textarea>
 
 <style>

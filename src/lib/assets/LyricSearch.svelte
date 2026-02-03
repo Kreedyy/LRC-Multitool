@@ -9,6 +9,8 @@ no synced lyrics -> return null
 
 <script lang="ts">
 
+  let {result = $bindable()} = $props();
+
   function reformatInput (input:string){
     let formattedInput: string = input.replace(/ /g, '+');
     return formattedInput;
@@ -18,16 +20,15 @@ no synced lyrics -> return null
     if (input.trim() == '') return;
 
     const response = await fetch(`/api/lyrics?q=${reformatInput(input)}`);
-    const data = await response.json();
+    result = await response.json();
   }
   
   let userSearch = $state<string>();
-  let fetchedLyricsPlain = $state<string>();
-  let fetchedLyricsSynced = $state<string>();
+  
 </script>
 
 
-<input class="searchInput" type="text" bind:value={userSearch}>
+<input class="searchInput" type="text" bind:value={result}>
 
 <style>
   .searchInput{
