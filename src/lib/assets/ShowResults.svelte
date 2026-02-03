@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { formatLyrics } from '$lib/assets/FormatLyrics';
 	let {
 		result = $bindable(),
 		userPick = $bindable(),
@@ -14,6 +15,8 @@
 	let resultsContainer = $state<HTMLDivElement>();
 
 	function setUserPick(getSynced: boolean, item: any) {
+		item.plainLyrics = formatLyrics(item?.plainLyrics);
+		item.syncedLyrics = formatLyrics(item?.syncedLyrics);
 		userPick = item;
 		getSyncedLyrics = getSynced;
 	}
