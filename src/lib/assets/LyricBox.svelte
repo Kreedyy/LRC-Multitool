@@ -1,5 +1,13 @@
-<textarea>
+<script lang="ts">
+  let {
+    lyrics
+  } = $props<{
+    lyrics?: string;
+  }>();
+</script>
 
+<textarea>
+{lyrics}
 </textarea>
 
 <style>

@@ -5,7 +5,7 @@
 
 <div>
   <LyricSearch />
-  <LyricBox />
+  <LyricBox lyrics="hellu"/>
 </div>
 
 <style>
