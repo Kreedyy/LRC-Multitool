@@ -27,14 +27,14 @@ no synced lyrics -> return null
 
 <div>
 	<label for="searchInput">Search track, artist or album</label>
-<div class="input">
-	<input id="searchInput" class="searchInput" type="text" bind:value={userSearch} />
-	<button onclick={() => search(userSearch)}>Search</button>
-</div>
+	<div class="input">
+		<input id="searchInput" class="searchInput" type="text" bind:value={userSearch} />
+		<button onclick={() => search(userSearch)}>Search</button>
+	</div>
 </div>
 
 <style>
-	.input{
+	.input {
 		display: flex;
 		gap: 0.5rem;
 	}
