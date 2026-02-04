@@ -9,7 +9,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>LRC Creator</title>
+	<title>LRC Multitool</title>
 </svelte:head>
 
 <div>

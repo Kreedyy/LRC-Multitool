@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatLyrics } from '$lib/assets/FormatLyrics';
+	import { formatLyrics, formatSharedData } from '$lib/assets/FormatLyrics';
 	import { setSharedTrackData } from '$lib/assets/SharedData.svelte';
 	let {
 		userPick = $bindable(),
@@ -16,6 +16,7 @@
 	}
 
 	function format() {
+		formatSharedData();
 		if (lyrics) {
 			lyrics = formatLyrics(lyrics);
 		}
@@ -31,20 +32,8 @@
 		const timer = setTimeout(format, 3000);
 		return () => clearTimeout(timer);
 	});
-	// Transform data here
 </script>
 
-<!--
-.trackName string
-.name string //Same as .trackName?
-.albumName string
-.artistName string
-.duration number
-.id number
-.instrumental bool
-.plainLyrics string
-.syncedLyrics
--->
 <div class="lyricEditor">
 	<!--<button onclick={format}> Format </button>-->
 	<textarea bind:value={lyrics}> </textarea>

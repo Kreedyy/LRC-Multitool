@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { extractMetadataFromFile } from './ExtractAudio';
 	import RangeInput from './RangeInput.svelte';
 	import { setSharedTrackData } from './SharedData.svelte';
 
@@ -25,6 +26,7 @@
 					URL.revokeObjectURL(audioUrl);
 				}
 				audioUrl = URL.createObjectURL(file);
+				extractMetadataFromFile(file);
 			}
 		}
 	}
@@ -78,7 +80,7 @@
 
 	function loadDuration(): void {
 		duration = Math.round(audioElement.duration);
-		setSharedTrackData({duration:duration})
+		setSharedTrackData({ duration: duration });
 	}
 
 	function handleSeek(event: Event): void {

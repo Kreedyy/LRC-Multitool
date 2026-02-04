@@ -8,7 +8,7 @@
 		step = 1,
 		value = $bindable(0),
 		oninput,
-		class: className = '' //Easier to style in separate file, see AudioPlayer.svelte
+		class: className = '' // Easier to style in separate file, see AudioPlayer.svelte
 	} = $props<{
 		min?: number;
 		max?: number;

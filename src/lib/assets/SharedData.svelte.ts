@@ -1,10 +1,16 @@
 export let shared = $state<{
-	artist?: string;
-	track?: string;
-	album?: string;
-	duration?: number;
-	lyrics?: string;
-}>({});
+	artist: string;
+	track: string;
+	album: string;
+	duration: number;
+	lyrics: string;
+}>({
+	artist: '',
+	track: '',
+	album: '',
+	duration: 0,
+	lyrics: ''
+});
 
 // Usage: setSharedTrackData({ artist: "Artist Name", track: "Track Name" });
 export function setSharedTrackData({
@@ -27,7 +33,7 @@ export function setSharedTrackData({
 	lyrics && (shared.lyrics = lyrics);
 }
 
-// In case you rather assign an array for these
+// In case you rather use object for these
 export function getSharedTrackData(
 	...fields: ('artist' | 'track' | 'album' | 'duration' | 'lyrics')[]
 ) {
@@ -48,22 +54,18 @@ export function getSharedTrackData(
 	return result;
 }
 
-export function getSharedArtist() {
+export function getSharedArtist(): string {
 	return shared.artist;
 }
-
-export function getSharedTrack() {
+export function getSharedTrack(): string {
 	return shared.track;
 }
-
-export function getSharedAlbum() {
+export function getSharedAlbum(): string {
 	return shared.album;
 }
-
-export function getSharedDuration() {
+export function getSharedDuration(): number {
 	return shared.duration;
 }
-
-export function getSharedLyrics() {
+export function getSharedLyrics(): string {
 	return shared.lyrics;
 }

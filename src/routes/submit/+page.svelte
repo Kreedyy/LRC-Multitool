@@ -1,47 +1,277 @@
 <script lang="ts">
 	import {
-	getSharedDuration,
+		getSharedAlbum,
+		getSharedArtist,
+		getSharedDuration,
 		getSharedLyrics,
+		getSharedTrack,
 		setSharedTrackData
 	} from '$lib/assets/SharedData.svelte';
 	import LyricBox from '$lib/assets/LyricBox.svelte';
+	import { onMount } from 'svelte';
+
+	let wasmModule: any = null;
+	let wasmLoaded = $state(false);
+
+	onMount(async () => {
+		try {
+			const wasm = await import('$lib/wasm/lrclib_challenge_solver');
+			await wasm.default();
+			wasmModule = wasm;
+			wasmLoaded = true;
+			console.log('WASM challenge solver loaded');
+		} catch (err) {
+			console.error('Failed to load WASM module:', err);
+			error = 'Failed to load challenge solver. Please refresh the page.';
+		}
+	});
 
 	let artist = $state<string>();
+	artist = getSharedArtist();
 	let track = $state<string>();
+	track = getSharedTrack();
 	let album = $state<string>();
+	album = getSharedAlbum();
 
 	let lyrics = $state<string>();
 	lyrics = getSharedLyrics();
+	let duration = $state<number>();
+	duration = getSharedDuration();
 
 	$effect(() => {
-		setSharedTrackData({ artist: artist, track:track, album: album, lyrics: lyrics });
+		setSharedTrackData({ artist, track, album, lyrics, duration });
 	});
+
+	let loading = $state(false);
+	let solvingChallenge = $state(false);
+	let error = $state('');
+	let success = $state(false);
+	let progress = $state('');
+
+	async function postLyrics(e: Event) {
+		e.preventDefault();
+
+		if (!wasmLoaded || !wasmModule) {
+			error = 'Challenge solver not loaded. Please refresh the page.';
+			return;
+		}
+
+		loading = true;
+		solvingChallenge = false;
+		error = '';
+		success = false;
+		progress = 'Preparing submission...';
+
+		setSharedTrackData({
+			artist,
+			track,
+			album,
+			lyrics,
+			duration
+		});
+
+		try {
+			progress = 'Requesting challenge...';
+
+			// Request challenge via server
+			const challengeResponse = await fetch('/api/lyrics', {
+				method: 'PUT'
+			});
+
+			if (!challengeResponse.ok) {
+				throw new Error('Failed to get challenge');
+			}
+
+			const { prefix, target } = await challengeResponse.json();
+
+			// Solve challenge using WASM (client-side), way faster than using js
+			progress = 'Solving challenge (this may take a moment)...';
+			solvingChallenge = true;
+
+			// Run solver in a setTimeout to allow UI to update
+			const nonce = await new Promise<string>((resolve, reject) => {
+				setTimeout(() => {
+					try {
+						const result = wasmModule.solve_challenge(prefix, target);
+						resolve(result);
+					} catch (err) {
+						reject(err);
+					}
+				}, 10);
+			});
+
+			solvingChallenge = false;
+
+			const publishToken = `${prefix}:${nonce}`;
+
+			// Publish via server proxy
+			progress = 'Publishing lyrics...';
+
+			const publishResponse = await fetch('/api/lyrics', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					publishToken,
+					artist,
+					track,
+					album,
+					lyrics,
+					duration
+				})
+			});
+
+			if (!publishResponse.ok) {
+				const errorData = await publishResponse.json();
+				throw new Error(errorData.message || 'Publish failed');
+			}
+
+			const data = await publishResponse.json();
+			success = true;
+			progress = '';
+		} catch (err) {
+			error = err instanceof Error ? err.message : 'An error occurred';
+			progress = '';
+		} finally {
+			loading = false;
+			solvingChallenge = false;
+		}
+	}
 </script>
 
 <div class="base">
-	<form>
+	<form onsubmit={postLyrics}>
 		<div class="inputContainer">
-			<div>
-				<label for="artist">Artist</label>
-			<input id="artist" type="text" bind:value={artist} />
+			<div class="artistAlbumContainer">
+				<div class="column">
+					<label for="artist">Artist</label>
+					<input id="artist" required type="text" bind:value={artist} />
+				</div>
+				<div class="column">
+					<label for="album">Album</label>
+					<input id="album" type="text" bind:value={album} />
+				</div>
 			</div>
-
-			<div>
-				<label for="track">Track</label>
-			<input id="track" type="text" bind:value={track} />
-			</div>
-
-			<div>
-				<label for="album">Album</label>
-			<input id="album" type="text" bind:value={album} />
+			<div class="trackDurationContainer">
+				<div class="column">
+					<label for="track">Track</label>
+					<input id="track" required type="text" bind:value={track} />
+				</div>
+				<div class="column">
+					<label for="duration">Duration</label>
+					<input id="duration" required type="text" bind:value={duration} />
+				</div>
 			</div>
 		</div>
-		<LyricBox {lyrics} />
+		<LyricBox bind:lyrics />
+
+		{#if !wasmLoaded}
+			<div class="info">Loading challenge solver...</div>
+		{/if}
+
+		{#if progress}
+			<div class="info">
+				{progress}
+				{#if solvingChallenge}
+					<div class="spinner"></div>
+				{/if}
+			</div>
+		{/if}
+
+		{#if error}
+			<div class="error">{error}</div>
+		{/if}
+
+		{#if success}
+			<div class="success">Published successfully!</div>
+		{/if}
+
+		<button type="submit" disabled={loading || !wasmLoaded}>
+			{loading ? 'Publishing...' : 'Submit'}
+		</button>
 	</form>
 </div>
 
 <style>
-	input{
+	.column {
+		display: flex;
+		flex-direction: column;
+	}
+	.artistAlbumContainer,
+	.trackDurationContainer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		width: 100%;
+		max-width: 200px;
+	}
+	button {
+		font-size: 1rem;
+		padding: 0;
+		margin: 0;
+		background-color: var(--neutral-450);
+		border: 2px solid var(--brand-500);
+		color: var(--neutral-100);
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+		padding-top: 0.25rem;
+		padding-bottom: 0.25rem;
+		cursor: pointer;
+	}
+
+	button:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	.error {
+		color: #ff4444;
+		background-color: rgba(255, 68, 68, 0.1);
+		border: 1px solid #ff4444;
+		padding: 0.5rem 1rem;
+		border-radius: 4px;
+		font-size: 0.9rem;
+	}
+
+	.success {
+		color: #44ff44;
+		background-color: rgba(68, 255, 68, 0.1);
+		border: 1px solid #44ff44;
+		padding: 0.5rem 1rem;
+		border-radius: 4px;
+		font-size: 0.9rem;
+	}
+
+	.info {
+		color: #4444ff;
+		background-color: rgba(68, 68, 255, 0.1);
+		border: 1px solid #4444ff;
+		padding: 0.5rem 1rem;
+		border-radius: 4px;
+		font-size: 0.9rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.spinner {
+		width: 16px;
+		height: 16px;
+		border: 2px solid #4444ff;
+		border-top-color: transparent;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	@keyframes spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	input {
 		padding-top: 0.25rem;
 		padding-bottom: 0.25rem;
 		padding-left: 0.25rem;
@@ -49,15 +279,18 @@
 		border: 2px solid var(--brand-500);
 		color: var(--neutral-100);
 		font-size: 1rem;
+		width: calc(100% - 0.5rem - 2px);
 	}
-	.inputContainer{
+	.inputContainer {
 		display: flex;
 		gap: 2rem;
+		width: 100%;
+		justify-content: center;
 	}
-	label{
+	label {
 		color: var(--neutral-100);
 	}
-	:global(.lyricEditor){
+	:global(.lyricEditor) {
 		flex: 1;
 	}
 	form {
@@ -76,7 +309,10 @@
 		align-items: center;
 		padding: 2rem;
 	}
-		@media only screen and (max-width: 600px) {
+	@media only screen and (max-width: 600px) {
+		.inputContainer {
+			gap: 1rem;
+		}
 		.base {
 			padding-left: 1rem;
 			padding-right: 1rem;

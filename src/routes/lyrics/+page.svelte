@@ -6,7 +6,7 @@
 
 	let result = $state<any>();
 	let userPick = $state<any>();
-	let getSyncedLyrics = $state<boolean>();
+	let getSyncedLyrics = $state<boolean>(true);
 	let showResults = $state<boolean>(false);
 	let lyrics = $state<string>();
 	lyrics = getSharedLyrics();
@@ -16,9 +16,9 @@
 	<!--Fetch results and assign to data-->
 	<LyricSearch bind:result bind:showResults />
 	<!--Showcase of results from data and handles user pick-->
-	<ShowResults bind:userPick bind:getSyncedLyrics {result} bind:showResults />
+	<ShowResults bind:userPick bind:getSyncedLyrics bind:result bind:showResults />
 	<!--Processes user pick by filling textarea with lyrics-->
-	<LyricBox {userPick} {getSyncedLyrics} {lyrics} />
+	<LyricBox bind:userPick bind:getSyncedLyrics bind:lyrics />
 	<a href="/submit">Submitting to LRCLIB</a>
 </div>
 
@@ -34,7 +34,7 @@
 		align-items: center;
 		padding: 2rem;
 	}
-	:global(.lyricEditor){
+	:global(.lyricEditor) {
 		flex: 1;
 	}
 	:global(.showResults) {

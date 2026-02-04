@@ -22,7 +22,7 @@
 	}
 
 	onMount(() => {
-		setActive(checkActive(page.route.id)); //This just fills icon inside Nav if user navigates without pressing button :]
+		setActive(checkActive(page.route.id)); // This just fills icon inside Nav if user navigates without pressing button :]
 	});
 </script>
 
@@ -66,7 +66,7 @@
 	</a>
 	-->
 	<a
-		href="https://github.com/Kreedyy/LRC-maker"
+		href="https://github.com/Kreedyy/LRC-Multitool"
 		title="Repo"
 		onclick={() => setActive('github')}
 		class:selected={activeIcon == 'github'}

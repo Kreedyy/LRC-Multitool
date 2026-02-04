@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { formatLyrics } from '$lib/assets/FormatLyrics';
+	import { setSharedTrackData } from './SharedData.svelte';
 	let {
 		result = $bindable(),
 		userPick = $bindable(),
@@ -19,6 +20,11 @@
 		item.plainLyrics = formatLyrics(item?.plainLyrics);
 		item.syncedLyrics = formatLyrics(item?.syncedLyrics);
 		userPick = item;
+		let artist: string = userPick.artistName;
+		let album: string = userPick.albumName;
+		let track: string = userPick.trackName;
+		let duration: number = userPick.duration;
+		setSharedTrackData({ artist: artist, album: album, track: track, duration: duration });
 		getSyncedLyrics = getSynced;
 	}
 
@@ -29,21 +35,6 @@
 	}
 </script>
 
-<!--
-.trackName string
-.name string //Same as .trackName?
-.albumName string
-.artistName string
-.duration number
-.id number
-.instrumental bool
-.plainLyrics string
-.syncedLyrics
-
-show buttons for importing plain and synced lyrics or mark as instrumental if instrumental
--->
-
-<!--Hides results if clicking outside of results or search input-->
 <svelte:document
 	onclick={(e) => {
 		if (
@@ -102,7 +93,8 @@ show buttons for importing plain and synced lyrics or mark as instrumental if in
 		gap: 1rem;
 		overflow: scroll;
 		position: absolute;
-		top: 102px;
+		top: 167px;
+		height: calc(100% - 316px);
 
 		backdrop-filter: blur(4px);
 		padding: 1rem;
@@ -151,5 +143,18 @@ show buttons for importing plain and synced lyrics or mark as instrumental if in
 		padding-bottom: 0.125rem;
 		padding-left: 0.25rem;
 		padding-right: 0.25rem;
+	}
+	@media only screen and (max-width: 800px) {
+		/*Hideous but works ig*/
+		.showResults {
+			top: 153px;
+			height: calc(100% - 331px);
+		}
+	}
+	@media only screen and (max-width: 400px) {
+		.showResults {
+			top: 144px;
+			height: calc(100% - 317px);
+		}
 	}
 </style>
