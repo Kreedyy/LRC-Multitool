@@ -104,7 +104,7 @@ show buttons for importing plain and synced lyrics or mark as instrumental if in
 		position: absolute;
 		top: 102px;
 
-		backdrop-filter: blur(3px);
+		backdrop-filter: blur(4px);
 		padding: 1rem;
 	}
 	.result {

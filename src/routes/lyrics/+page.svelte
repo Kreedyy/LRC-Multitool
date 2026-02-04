@@ -16,9 +16,13 @@
 	<ShowResults bind:userPick bind:getSyncedLyrics {result} bind:showResults />
 	<!--Processes user pick by filling textarea with lyrics-->
 	<LyricBox {userPick} {getSyncedLyrics} />
+	<a href="/submit">Submitting to LRCLIB</a>
 </div>
 
 <style>
+	a{
+		font-size: 1.25rem;
+	}
 	div {
 		height: 100%;
 		display: flex;
@@ -33,7 +37,7 @@
 		height: 100%;
 		width: calc(100% - 6rem);
 		max-width: calc(750px - 1rem + 4px);
-		height: calc(100% - 10.5rem + 2px);
+		height: calc(100% - 13rem);
 	}
 	@media only screen and (max-width: 600px) {
 		div {
