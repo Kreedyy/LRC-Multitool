@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { formatLyrics } from '$lib/assets/FormatLyrics';
-	import { shared } from '$lib/assets/SharedData.svelte';
+	import { setSharedLyrics } from '$lib/assets/SharedData.svelte';
 	let {
 		userPick = $bindable(),
 		getSyncedLyrics = $bindable(true),
@@ -27,7 +27,7 @@
 		}
 	});
 	$effect(() => {
-		shared.lyrics = lyrics;
+		setSharedLyrics(lyrics);
 		const timer = setTimeout(format, 3000);
     return () => clearTimeout(timer);
 	});
