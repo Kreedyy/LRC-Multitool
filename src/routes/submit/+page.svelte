@@ -36,7 +36,6 @@
 			<input id="album" type="text" bind:value={album} />
 			</div>
 		</div>
-		<p>test{getSharedDuration()}</p>
 		<LyricBox {lyrics} />
 	</form>
 </div>
@@ -57,6 +56,7 @@
 		flex-direction: column;
 		align-items: center;
 		height: 100%;
+		gap: 1rem;
 	}
 	.base {
 		height: 100%;
