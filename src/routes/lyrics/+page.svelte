@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import LyricBox from '$lib/assets/LyricBox.svelte';
 	import LyricSearch from '$lib/assets/LyricSearch.svelte';
 	import ShowResults from '$lib/assets/ShowResults.svelte';
