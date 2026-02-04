@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { shared } from '$lib/assets/SharedData.svelte';
+	import { getSharedLyrics, setSharedTrackData } from '$lib/assets/SharedData.svelte';
 	import LyricBox from '$lib/assets/LyricBox.svelte';
 
 	let lyrics = $state<string>();
-	lyrics = shared.lyrics;
+	lyrics = getSharedLyrics();
 
 	$effect(() => {
-		shared.lyrics = lyrics;
+		setSharedTrackData({lyrics: lyrics})
 	});
 </script>
 

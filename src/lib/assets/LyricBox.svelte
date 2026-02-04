@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { formatLyrics } from '$lib/assets/FormatLyrics';
-	import { setSharedLyrics } from '$lib/assets/SharedData.svelte';
+	import { setSharedTrackData } from '$lib/assets/SharedData.svelte';
 	let {
 		userPick = $bindable(),
 		getSyncedLyrics = $bindable(true),
@@ -27,9 +27,9 @@
 		}
 	});
 	$effect(() => {
-		setSharedLyrics(lyrics);
+		setSharedTrackData({ lyrics: lyrics });
 		const timer = setTimeout(format, 3000);
-    return () => clearTimeout(timer);
+		return () => clearTimeout(timer);
 	});
 	// Transform data here
 </script>

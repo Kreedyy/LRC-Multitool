@@ -6,62 +6,66 @@ export let shared = $state<{
 	lyrics?: string;
 }>({});
 
-export function getSharedTrackData(
-  ...fields: ('artist' | 'track' | 'album' | 'duration' | 'lyrics')[]
-) {
-  if (fields.length === 0) {
-    return {
-      artist: shared.artist,
-      track: shared.track,
-      album: shared.album,
-      duration: shared.duration,
-      lyrics: shared.lyrics
-    };
-  }
 
-  const result: any = {};
-  fields.forEach(field => {
-    result[field] = shared[field];
-  });
-  return result;
-}
 
+// Usage: setSharedTrackData({ artist: "Artist Name", track: "Track Name" });
 export function setSharedTrackData({
-  artist,
-  track,
-  album,
-  duration,
-  lyrics
+	artist,
+	track,
+	album,
+	duration,
+	lyrics
 }: {
-  artist?: string;
-  track?: string;
-  album?: string;
-  duration?: number;
-  lyrics?: string;
+	artist?: string;
+	track?: string;
+	album?: string;
+	duration?: number;
+	lyrics?: string;
 } = {}) {
-  artist && setSharedArtist(artist);
-  track && setSharedTrack(track);
-  album && setSharedAlbum(album);
-  duration && setSharedDuration(duration);
-  lyrics && setSharedLyrics(lyrics);
+	artist && (shared.artist = artist);
+	track && (shared.track = track);
+	album && (shared.album = album);
+	duration && (shared.duration = duration);
+	lyrics && (shared.lyrics = lyrics);
 }
 
-export function setSharedArtist(artist: string){
-	shared.artist = artist;
+// In case you rather assign an array for these
+export function getSharedTrackData(
+	...fields: ('artist' | 'track' | 'album' | 'duration' | 'lyrics')[]
+) {
+	if (fields.length === 0) {
+		return {
+			artist: shared.artist,
+			track: shared.track,
+			album: shared.album,
+			duration: shared.duration,
+			lyrics: shared.lyrics
+		};
+	}
+
+	const result: any = {};
+	fields.forEach((field) => {
+		result[field] = shared[field];
+	});
+	return result;
 }
 
-export function setSharedTrack(track: string) {
-	shared.track = track;
+export function getSharedArtist(){
+	return shared.artist;
 }
 
-export function setSharedAlbum(album: string) {
-	shared.album = album;
+export function getSharedTrack(){
+	return shared.track;
 }
 
-export function setSharedDuration(duration: number) {
-	shared.duration = duration;
+export function getSharedAlbum(){
+	return shared.album;
 }
 
-export function setSharedLyrics(lyrics: string) {
-	shared.lyrics = lyrics;
+export function getSharedDuration(){
+	return shared.duration;
+}
+
+export function getSharedLyrics(){
+	return shared.lyrics;
 }
