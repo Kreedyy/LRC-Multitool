@@ -77,6 +77,7 @@ no synced lyrics -> return null
 		width: 100%;
 		padding-top: 0.25rem;
 		padding-bottom: 0.25rem;
+		padding-left: 0.25rem;
 		background: var(--neutral-450);
 		border: 2px solid var(--brand-500);
 		color: var(--neutral-100);
