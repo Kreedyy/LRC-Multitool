@@ -21,9 +21,20 @@
 <div class="base">
 	<form>
 		<div class="inputContainer">
-			<input type="text" bind:value={artist} />
-			<input type="text" bind:value={track} />
-			<input type="text" bind:value={album} />
+			<div>
+				<label for="artist">Artist</label>
+			<input id="artist" type="text" bind:value={artist} />
+			</div>
+
+			<div>
+				<label for="track">Track</label>
+			<input id="track" type="text" bind:value={track} />
+			</div>
+
+			<div>
+				<label for="album">Album</label>
+			<input id="album" type="text" bind:value={album} />
+			</div>
 		</div>
 		<p>test{getSharedDuration()}</p>
 		<LyricBox {lyrics} />
@@ -31,6 +42,13 @@
 </div>
 
 <style>
+	.inputContainer{
+		display: flex;
+		gap: 2rem;
+	}
+	label{
+		color: var(--neutral-100);
+	}
 	:global(.lyricEditor){
 		flex: 1;
 	}
