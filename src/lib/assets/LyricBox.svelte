@@ -43,7 +43,7 @@
 
 <style>
 	button {
-		position: fixed;
+		position: absolute;
 		font-size: 1.25rem;
 		background: var(--neutral-450);
 		color: var(--neutral-100);

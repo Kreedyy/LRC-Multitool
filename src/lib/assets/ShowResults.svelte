@@ -101,7 +101,8 @@ show buttons for importing plain and synced lyrics or mark as instrumental if in
 		flex-direction: column;
 		gap: 1rem;
 		overflow: scroll;
-		position: fixed;
+		position: absolute;
+		top: 102px;
 
 		backdrop-filter: blur(3px);
 		padding: 1rem;

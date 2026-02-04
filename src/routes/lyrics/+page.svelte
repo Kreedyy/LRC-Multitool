@@ -26,16 +26,22 @@
 		gap: 1rem;
 		align-items: center;
 		padding: 2rem;
+		position: relative;
 	}
 	:global(.showResults) {
 		z-index: 2;
-		height: 75%;
-		max-height: 500px;
+		height: 100%;
+		width: calc(100% - 6rem);
+		max-width: calc(750px - 1rem + 4px);
+		height: calc(100% - 10.5rem + 2px);
 	}
 	@media only screen and (max-width: 600px) {
 		div {
 			padding-left: 1rem;
 			padding-right: 1rem;
+		}
+		:global(.showResults){
+			width: calc(100% - 4rem);
 		}
 	}
 </style>
