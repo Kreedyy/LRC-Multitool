@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { formatLyrics } from '$lib/assets/FormatLyrics';
-	import { onMount } from 'svelte';
+	import { globalLyrics } from '$lib/assets/GlobalLyrics.svelte';
 	let {
 		userPick = $bindable(),
 		getSyncedLyrics = $bindable(true),
@@ -25,6 +25,9 @@
 		if (userPick) {
 			setPlainOrSyncedLyrics(getSyncedLyrics);
 		}
+	});
+	$effect(() => {
+		globalLyrics.lyrics = lyrics;
 	});
 	// Transform data here
 </script>

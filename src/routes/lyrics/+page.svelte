@@ -10,12 +10,7 @@
 	let getSyncedLyrics = $state<boolean>();
 	let showResults = $state<boolean>(false);
 	let lyrics = $state<string>();
-
-	function navigateToSubmit(e: MouseEvent) {
-		e.preventDefault();
-		globalLyrics.lyrics = lyrics;
-		goto('/submit');
-	}
+	lyrics = globalLyrics.lyrics;
 </script>
 
 <div>
@@ -24,8 +19,8 @@
 	<!--Showcase of results from data and handles user pick-->
 	<ShowResults bind:userPick bind:getSyncedLyrics {result} bind:showResults />
 	<!--Processes user pick by filling textarea with lyrics-->
-	<LyricBox {userPick} {getSyncedLyrics} bind:lyrics />
-	<a href="/submit" onclick={navigateToSubmit}>Submitting to LRCLIB</a>
+	<LyricBox {userPick} {getSyncedLyrics} {lyrics} />
+	<a href="/submit">Submitting to LRCLIB</a>
 </div>
 
 <style>

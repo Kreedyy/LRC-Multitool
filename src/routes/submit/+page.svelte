@@ -2,10 +2,11 @@
 	import { globalLyrics } from '$lib/assets/GlobalLyrics.svelte';
 	import LyricBox from '$lib/assets/LyricBox.svelte';
 
-	let lyrics = globalLyrics.lyrics;
+	let lyrics = $state<string>();
+	lyrics = globalLyrics.lyrics;
 
 	$effect(() => {
-		console.log(lyrics);
+		globalLyrics.lyrics = lyrics;
 	});
 </script>
 
