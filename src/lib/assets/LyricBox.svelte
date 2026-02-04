@@ -45,7 +45,7 @@
 .plainLyrics string
 .syncedLyrics
 -->
-<div>
+<div class="lyricEditor">
 	<!--<button onclick={format}> Format </button>-->
 	<textarea bind:value={lyrics}> </textarea>
 </div>
@@ -68,11 +68,8 @@
 		cursor: pointer;
 	} */
 	div {
-		width: 100%;
-		max-width: fit-content;
 		/* justify-content: end;
 		align-items: end; */
-		height: 100%;
 		display: flex;
 	}
 	textarea {
@@ -82,17 +79,17 @@
 		background: var(--neutral-450);
 		width: 750px;
 		height: calc(
-			100% - 0.5rem - 4px - 37px
+			100% - 1rem - 4px
 		); /*0.5rem from padding top, 4px for border (2px * 2), 37px for padding bottom*/
 		color: var(--neutral-100);
 		padding: 0.5rem;
 		margin: 0;
-		padding-bottom: 37px;
+		/*padding-bottom: 37px;*/
 	}
 	@media only screen and (max-width: 600px) {
 		textarea {
 			height: calc(100% - 0.5rem - 4px - 33px);
-			padding-bottom: 33px;
+			/*padding-bottom: 33px;*/
 		}
 		/* button {
 			font-size: 1rem;

@@ -33,7 +33,9 @@
 		gap: 1rem;
 		align-items: center;
 		padding: 2rem;
-		position: relative;
+	}
+	:global(.lyricEditor){
+		flex: 1;
 	}
 	:global(.showResults) {
 		z-index: 2;

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import RangeInput from './RangeInput.svelte';
+	import { setSharedTrackData } from './SharedData.svelte';
 
 	let audioElement: HTMLAudioElement;
 	let isPlaying: boolean = $state(false);
@@ -76,7 +77,8 @@
 	}
 
 	function loadDuration(): void {
-		duration = audioElement.duration;
+		duration = Math.round(audioElement.duration);
+		setSharedTrackData({duration:duration})
 	}
 
 	function handleSeek(event: Event): void {
