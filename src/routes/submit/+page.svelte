@@ -159,7 +159,7 @@
 					<input id="track" required type="text" bind:value={track} />
 				</div>
 				<div class="column">
-					<label for="duration">Duration</label>
+					<label for="duration">Duration (sec)</label>
 					<input id="duration" required type="text" bind:value={duration} />
 				</div>
 			</div>
