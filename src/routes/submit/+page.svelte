@@ -145,7 +145,7 @@
 		<div class="inputContainer">
 			<div class="artistAlbumContainer">
 				<div class="column">
-					<label for="artist">Artist</label>
+					<label for="artist">Artist *</label>
 					<input id="artist" required type="text" bind:value={artist} />
 				</div>
 				<div class="column">
@@ -155,11 +155,11 @@
 			</div>
 			<div class="trackDurationContainer">
 				<div class="column">
-					<label for="track">Track</label>
+					<label for="track">Track *</label>
 					<input id="track" required type="text" bind:value={track} />
 				</div>
 				<div class="column">
-					<label for="duration">Duration (sec)</label>
+					<label for="duration">Duration (s) *</label>
 					<input id="duration" required type="text" bind:value={duration} />
 				</div>
 			</div>
