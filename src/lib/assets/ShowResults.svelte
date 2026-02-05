@@ -82,9 +82,9 @@
 	.results-container {
 		position: absolute;
 		top: 167px;
-		left: 0;
-		right: 0;
 		height: calc(100% - 316px);
+		width: 90%;
+		max-width: fit-content;
 		display: flex;
 		flex-direction: column;
 		padding: 1rem;
@@ -112,8 +112,7 @@
 
 	.result-card {
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		flex-direction: column;
 		gap: 1rem;
 		padding: 0.875rem 1rem;
 		background: var(--neutral-500);
