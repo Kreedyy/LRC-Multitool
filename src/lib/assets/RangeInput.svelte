@@ -6,6 +6,7 @@
 		value?: number;
 		oninput?: (event: Event) => void;
 		class?: string;
+		ariaLabel?: string;
 	};
 	let {
 		min = 0,
@@ -13,7 +14,8 @@
 		step = 1,
 		value = $bindable(0),
 		oninput,
-		class: className = ''
+		class: className = '',
+		ariaLabel = 'Slider'
 	}: Props = $props();
 
 	let inputElement: HTMLInputElement;
@@ -46,7 +48,7 @@
 	});
 </script>
 
-<div class="range-container {className}" bind:this={containerElement}>
+<div class="range-container {className}" bind:this={containerElement} aria-label={ariaLabel}>
 	<div class="track">
 		<div class="track-fill" style="width: {fillWidth}px;"></div>
 	</div>

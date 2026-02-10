@@ -200,7 +200,7 @@
 			</svg>
 		</button>
 
-		<button class="icon-btn play" onclick={togglePlay}>
+		<button class="icon-btn play" title="Play button" onclick={togglePlay}>
 			{#if isPlaying}
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
 					<path
@@ -230,6 +230,7 @@
 			max={duration || 0}
 			bind:value={currentTime}
 			oninput={handleSeek}
+			ariaLabel="Seek slider"
 		/>
 	</div>
 
@@ -248,11 +249,12 @@
 			step={0.05}
 			bind:value={speed}
 			oninput={changeSpeed}
+			ariaLabel="Playbackrate slider"
 		/>
 	</div>
 
 	<div class="volume-container">
-		<button class="icon-btn mute" onclick={() => toggleMute(!isMuted)}>
+		<button class="icon-btn mute" title="Volume button" onclick={() => toggleMute(!isMuted)}>
 			{#if Math.round(volume * 100) <= 0}
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
 					<path
@@ -274,6 +276,7 @@
 			step={0.01}
 			bind:value={volume}
 			oninput={changeVolume}
+			ariaLabel="Volume slider"
 		/>
 	</div>
 </div>
@@ -291,10 +294,9 @@
 	}
 
 	.embed-containers {
-		position: absolute;
-		left: -9999px;
-		width: 200px;
-		height: 200px;
+		display: none;
+		width: 0px;
+		height: 0px;
 		overflow: hidden;
 		pointer-events: none;
 	}
