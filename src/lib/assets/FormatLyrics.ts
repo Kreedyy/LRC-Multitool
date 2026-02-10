@@ -69,10 +69,34 @@ export function validatePayload(payload: {
 	};
 }
 
+export function extractTimestamps(lyrics: string[]): string[] {
+	const timestampRegex = /\[\d{2}:\d{2}\.\d{2}\]/g; // Pattern: [mm:ss.xx]
+	const timestamps: string[] = [];
+	lyrics.forEach((line) => {
+		const matches = line.match(timestampRegex);
+		if (matches) {
+			timestamps.push(...matches);
+		}
+	});
+	return timestamps;
+}
+
+export function extractLyricsLines(lyrics: string[]): string[] {
+	const lines = lyrics.join('\n').split('\n');
+	const timestampRegex = /^\[\d{2}:\d{2}\.\d{2}\]/;
+
+	return lines.map((line) => {
+		if (timestampRegex.test(line)) {
+			return line.replace(timestampRegex, '').trim(); // Remove timestamp and trim whitespace
+		}
+		return line.trim();
+	});
+}
+
 export function validateLyrics(lyrics: string): boolean {
 	lyrics = formatLyrics(lyrics);
 	const lines = lyrics.split('\n');
-	const timestampRegex = /^\[\d{2}:\d{2}\.\d{2}\]/;
+	const timestampRegex = /^\[\d{2}:\d{2}\.\d{2}\]/; 
 
 	return lines.every((line) => {
 		return timestampRegex.test(line); // If all lines start with [mm:ss.xx] return true, else false

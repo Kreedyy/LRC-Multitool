@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { extractLyricsLines, extractTimestamps } from "./FormatLyrics";
   import { getSharedLyrics } from "./SharedData.svelte";
   let lyrics = $derived(getSharedLyrics().split("\n"));
+  let lyricsTimestamps = $derived(extractTimestamps(lyrics));
+  let lyricsLines = $derived(extractLyricsLines(lyrics));
 </script>
 <div class="main-container">
   {#each lyrics as line, index}
-    <div class="line-container {index}"><p>{line}</p></div>
+    <div class="line-container {index}"><p>Time: {lyricsTimestamps[index]} Text: {lyricsLines[index]}</p></div>
   {/each}
 
   <div class="sync-container">
