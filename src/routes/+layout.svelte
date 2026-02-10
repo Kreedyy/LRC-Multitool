@@ -50,11 +50,21 @@
 		--neutral-700: oklch(0.12 0.02 289.62);
 		--neutral-900: oklch(0.08 0.015 289.62);
 
+		--error: #ff4444;
+		--error-bg: rgba(255, 68, 68, 0.1);
+		--success: #44ff44;
+		--success-bg: rgba(68, 255, 68, 0.1);
+		--info: #4444ff;
+		--info-bg: rgba(68, 68, 255, 0.1);
+
+		--overlay: rgba(0, 0, 0, 0.6);
+
 		--radius-sm: 6px;
 		--radius-md: 10px;
 		--radius-lg: 14px;
 		--shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
 		--shadow-md: 0 4px 16px rgba(0, 0, 0, 0.25);
+		--shadow-thumb: 0 1px 4px rgba(0, 0, 0, 0.3);
 		--transition: 0.15s ease;
 	}
 	:global(body) {

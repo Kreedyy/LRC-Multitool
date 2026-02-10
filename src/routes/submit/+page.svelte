@@ -239,27 +239,27 @@
 	}
 
 	.error {
-		color: #ff4444;
-		background-color: rgba(255, 68, 68, 0.1);
-		border: 1px solid #ff4444;
+		color: var(--error);
+		background-color: var(--error-bg);
+		border: 1px solid var(--error);
 		padding: 0.5rem 1rem;
 		border-radius: 4px;
 		font-size: 0.9rem;
 	}
 
 	.success {
-		color: #44ff44;
-		background-color: rgba(68, 255, 68, 0.1);
-		border: 1px solid #44ff44;
+		color: var(--success);
+		background-color: var(--success-bg);
+		border: 1px solid var(--success);
 		padding: 0.5rem 1rem;
 		border-radius: 4px;
 		font-size: 0.9rem;
 	}
 
 	.info {
-		color: #4444ff;
-		background-color: rgba(68, 68, 255, 0.1);
-		border: 1px solid #4444ff;
+		color: var(--info);
+		background-color: var(--info-bg);
+		border: 1px solid var(--info);
 		padding: 0.5rem 1rem;
 		border-radius: 4px;
 		font-size: 0.9rem;
@@ -271,7 +271,7 @@
 	.spinner {
 		width: 16px;
 		height: 16px;
-		border: 2px solid #4444ff;
+		border: 2px solid var(--info);
 		border-top-color: transparent;
 		border-radius: 50%;
 		animation: spin 1s linear infinite;

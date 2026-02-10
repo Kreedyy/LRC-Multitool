@@ -83,7 +83,7 @@
 		background: var(--brand-500);
 		border-radius: 50%;
 		transition: left 0.05s ease-out;
-		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+		box-shadow: var(--shadow-thumb);
 	}
 
 	input[type='range'] {
