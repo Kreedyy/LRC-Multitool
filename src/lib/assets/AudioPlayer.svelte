@@ -176,7 +176,7 @@
 	</div>
 
 	<div class="speed-container">
-		<button class="speed-btn" onclick={() => (speed = 1)}>
+		<button class="speed-btn" onclick={() => changeSpeed({ target: { value: speed == 1 ? 1.5 : 1 } } as unknown as Event)}>
 			{speed.toFixed(2)}x
 		</button>
 		<RangeInput
