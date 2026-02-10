@@ -6,7 +6,7 @@
   let lyricsLines = $derived(extractLyricsLines(lyrics));
 </script>
 <div class="main-container">
-  {#each lyrics as line, index}
+  {#each lyrics, index}
     <div class="line-container {index}"><p>Time: {lyricsTimestamps[index]} Text: {lyricsLines[index]}</p></div>
   {/each}
 
