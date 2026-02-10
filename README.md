@@ -23,10 +23,10 @@ Download your music and stop paying for subscription based streaming services wh
 
 ## TODO
 
-- [ ] Lyric editing
+- [ ] Lyric syncing
 - [x] Functionality with [LRCLIB](https://lrclib.net/) API (GET /api/search param 'q' & POST)
 - [x] Only POST lyrics if ~~fully plain or~~ fully synced (checking if every line starts with valid [mm:ss.xx], if synced POST both plain & synced by removing timestamps) LRCLIB POST requires synced lyrics anyways
-- [ ] Uploading files via YouTube and SoundCloud, setSharedTrackData with the file's metadata
+- [x] Uploading files via YouTube and SoundCloud (setSharedTrackData with the file's metadata? maybe just let user fill these out manually so more attentive before publishing lyrics to lrclib)
 - [ ] MAYBE Add User-Agent header according to LRCLIB docs
 
 ## Prerequisites
