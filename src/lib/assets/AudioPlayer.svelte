@@ -130,19 +130,6 @@
 		}
 	}
 
-	function checkIfPlaying(): void {
-		if (isPlaying) {
-			updateTime();
-		} else {
-			if (animationFrameId) {
-				cancelAnimationFrame(animationFrameId);
-			}
-			if (backend) {
-				currentTime = backend.getCurrentTime();
-			}
-		}
-	}
-
 	function handleSeek(event: Event): void {
 		if (!backend) return;
 		const input = event.target as HTMLInputElement;
@@ -175,7 +162,17 @@
 
 	$effect(() => {
 		setSharedTrackData({ currentTime });
-		checkIfPlaying();
+	});
+
+	$effect(() => {
+		if (isPlaying) {
+			animationFrameId = requestAnimationFrame(updateTime);
+		} else {
+			if (animationFrameId) {
+				cancelAnimationFrame(animationFrameId);
+				animationFrameId = 0;
+			}
+		}
 	});
 </script>
 
