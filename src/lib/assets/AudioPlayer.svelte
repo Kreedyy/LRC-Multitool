@@ -32,6 +32,7 @@
 		},
 		onEnded: () => {
 			isPlaying = false;
+			currentTime = duration;
 		},
 		onDurationChange: (d: number) => {
 			duration = d;
