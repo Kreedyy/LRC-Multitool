@@ -37,26 +37,22 @@
 				<p>{lyricsTimestamps[index]} {lyricsLines[index]}</p>
 			</div>
 		{/each}
-	</div>
-
-	<div class="sync-container">
-		<button onclick={() => updateTimestamp(selectedIndex)} class="sync-btn">Sync</button>
+		<div class="sync-container">
+			<button onclick={() => updateTimestamp(selectedIndex)} class="sync-btn">Sync</button>
+		</div>
 	</div>
 </div>
 
 <style>
 	/*If index class is even, style it differently */
-	.current-time-container{
+	.current-time-container {
 		width: 125px;
 	}
 	.gap {
 		display: flex;
 		flex-direction: column;
 		gap: 1.25rem;
-		margin-bottom: 5rem;
 		height: 100%;
-		flex: 1;
-		overflow-y: auto;
 	}
 	.line-container {
 		display: grid;
@@ -66,15 +62,21 @@
 		position: relative;
 		width: 100%;
 		height: 100%;
+
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
 	}
 	.sync-container {
-		position: absolute;
+		position: sticky;
+		margin-top: auto;
+
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		bottom: 0;
-		width: 100%;
 		padding-bottom: 1rem;
+		width: 100%;
 	}
 	.sync-btn {
 		min-width: fit-content;
