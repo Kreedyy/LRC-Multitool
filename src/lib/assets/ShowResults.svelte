@@ -84,7 +84,7 @@
 	.results-container {
 		position: absolute;
 		top: 167px;
-		height: calc(100% - 356px);
+		height: calc(100% - 316px);
 		width: 90%;
 		max-width: fit-content;
 		display: flex;
