@@ -213,7 +213,7 @@
 
 	@media only screen and (max-width: 400px) {
 		.results-container {
-			top: 144px;
+			top: 164px;
 			height: calc(100% - 317px);
 		}
 

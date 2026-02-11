@@ -39,7 +39,6 @@
 	}
 	:global(.showResults) {
 		z-index: 2;
-		height: 100%;
 		width: calc(100% - 6rem);
 		max-width: calc(750px - 1rem + 4px);
 		height: calc(100% - 13rem);
