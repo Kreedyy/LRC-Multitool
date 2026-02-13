@@ -16,24 +16,23 @@
 	}
 
 	function updateTimestamp(index: number) {
-    const newTimestamp = formatTime(currentTime);
-    
-    // Build updated lyrics from current state, preserving existing timestamps
-    const updatedLines = lyricsLines.map((line, i) => {
-        if (i === index) {
-            return `${newTimestamp} ${line}`;
-        }
-        // Preserve existing timestamp if present, otherwise leave as plain text
-        const existing = lyricsTimestamps[i];
-        return existing ? `${existing} ${line}` : line;
-    });
+		const newTimestamp = formatTime(currentTime);
 
-    setSharedTrackData({ lyrics: updatedLines.join('\n') });
+		const updatedLines = lyricsLines.map((line, i) => {
+			if (i === index) {
+				return `${newTimestamp} ${line}`;
+			}
 
-    if (selectedIndex < lyricsLines.length - 1) {
-        setSelectedIndex(selectedIndex + 1);
-    }
-}
+			const existing = lyricsTimestamps[i];
+			return existing ? `${existing} ${line}` : line;
+		});
+
+		setSharedTrackData({ lyrics: updatedLines.join('\n') });
+
+		if (selectedIndex < lyricsLines.length - 1) {
+			setSelectedIndex(selectedIndex + 1);
+		}
+	}
 
 	function setSelectedIndex(index: number) {
 		selectedIndex = index;
@@ -83,7 +82,9 @@
 	.line-container.active p {
 		color: var(--neutral-450);
 	}
-	button:focus, button:hover, button:active{
+	button:focus,
+	button:hover,
+	button:active {
 		background-color: var(--neutral-450);
 		cursor: var(--neutral-100);
 	}
@@ -112,5 +113,4 @@
 		width: calc(100% - 10rem);
 		max-width: 400px;
 	}
-	
 </style>
