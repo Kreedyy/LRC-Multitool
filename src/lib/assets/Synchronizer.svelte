@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { extractLyricsLines, extractTimestamps } from './FormatLyrics';
-	import { getSharedCurrentTime, getSharedLyrics } from './SharedData.svelte';
+	import { getSharedCurrentTime, getSharedLyrics, setSharedTrackData } from './SharedData.svelte';
 	let lyrics = $derived<string[]>(getSharedLyrics().split('\n'));
 	let lyricsTimestamps = $derived<string[]>(extractTimestamps(lyrics));
 	let lyricsLines = $derived<string[]>(extractLyricsLines(lyrics));
@@ -16,8 +16,14 @@
 	}
 
 	function updateTimestamp(index: number) {
-		lyricsTimestamps[index] = formatTime(currentTime);
-	}
+	lyricsTimestamps[index] = formatTime(currentTime);
+	
+	const combinedLyrics = lyricsTimestamps
+		.map((timestamp, i) => `${timestamp} ${lyricsLines[i]}`)
+		.join('\n');
+	
+	setSharedTrackData({ lyrics: combinedLyrics });
+}
 
 	function setSelectedIndex(index: number) {
 		selectedIndex = index;
