@@ -16,18 +16,24 @@
 	}
 
 	function updateTimestamp(index: number) {
-		lyricsTimestamps[index] = formatTime(currentTime);
+    const newTimestamp = formatTime(currentTime);
+    
+    // Build updated lyrics from current state, preserving existing timestamps
+    const updatedLines = lyricsLines.map((line, i) => {
+        if (i === index) {
+            return `${newTimestamp} ${line}`;
+        }
+        // Preserve existing timestamp if present, otherwise leave as plain text
+        const existing = lyricsTimestamps[i];
+        return existing ? `${existing} ${line}` : line;
+    });
 
-		const combinedLyrics = lyricsTimestamps
-			.map((timestamp, i) => `${timestamp} ${lyricsLines[i]}`)
-			.join('\n');
+    setSharedTrackData({ lyrics: updatedLines.join('\n') });
 
-		setSharedTrackData({ lyrics: combinedLyrics });
-
-		if (selectedIndex < lyricsLines.length - 1) {
-			setSelectedIndex(selectedIndex + 1);
-		}
-	}
+    if (selectedIndex < lyricsLines.length - 1) {
+        setSelectedIndex(selectedIndex + 1);
+    }
+}
 
 	function setSelectedIndex(index: number) {
 		selectedIndex = index;

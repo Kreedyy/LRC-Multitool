@@ -70,15 +70,11 @@ export function validatePayload(payload: {
 }
 
 export function extractTimestamps(lyrics: string[]): string[] {
-	const timestampRegex = /\[\d{2}:\d{2}\.\d{2}\]/g; // Pattern: [mm:ss.xx]
-	const timestamps: string[] = [];
-	lyrics.forEach((line) => {
-		const matches = line.match(timestampRegex);
-		if (matches) {
-			timestamps.push(...matches);
-		}
+	const timestampRegex = /^\[\d{2}:\d{2}\.\d{2}\]/; // Pattern [mm:ss.xx]
+	return lyrics.map((line) => {
+		const match = line.match(timestampRegex);
+		return match ? match[0] : '';
 	});
-	return timestamps;
 }
 
 export function extractLyricsLines(lyrics: string[]): string[] {
