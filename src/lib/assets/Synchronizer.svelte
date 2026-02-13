@@ -16,18 +16,18 @@
 	}
 
 	function updateTimestamp(index: number) {
-	lyricsTimestamps[index] = formatTime(currentTime);
-	
-	const combinedLyrics = lyricsTimestamps
-		.map((timestamp, i) => `${timestamp} ${lyricsLines[i]}`)
-		.join('\n');
-	
-	setSharedTrackData({ lyrics: combinedLyrics });
+		lyricsTimestamps[index] = formatTime(currentTime);
 
-	if (selectedIndex < lyricsLines.length - 1) {
-		setSelectedIndex(selectedIndex + 1);
+		const combinedLyrics = lyricsTimestamps
+			.map((timestamp, i) => `${timestamp} ${lyricsLines[i]}`)
+			.join('\n');
+
+		setSharedTrackData({ lyrics: combinedLyrics });
+
+		if (selectedIndex < lyricsLines.length - 1) {
+			setSelectedIndex(selectedIndex + 1);
+		}
 	}
-}
 
 	function setSelectedIndex(index: number) {
 		selectedIndex = index;
@@ -37,14 +37,17 @@
 <div class="main-container">
 	<div class="gap">
 		{#each lyrics, index}
-			<div class="line-container {index}" onclick={() => setSelectedIndex(index)}>
+			<button
+				class="line-container {index === selectedIndex ? 'active' : ''} {index}"
+				onclick={() => setSelectedIndex(index)}
+			>
 				<div class="current-time-container">
 					{#if index == selectedIndex}
 						<p class="timestamp">{formatTime(currentTime)} ></p>
 					{/if}
 				</div>
 				<p>{lyricsTimestamps[index]} {lyricsLines[index]}</p>
-			</div>
+			</button>
 		{/each}
 		<div class="sync-container">
 			<button onclick={() => updateTimestamp(selectedIndex)} class="sync-btn">Sync</button>
@@ -66,6 +69,13 @@
 	.line-container {
 		display: grid;
 		grid-template-columns: auto 1fr;
+		text-align: left;
+	}
+	.line-container.active {
+		background-color: var(--brand-500);
+	}
+	.line-container.active p {
+		color: var(--neutral-450);
 	}
 	.main-container {
 		position: relative;
