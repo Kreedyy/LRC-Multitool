@@ -28,7 +28,6 @@ export function createSoundCloudBackend(
 	callbacks: BackendCallbacks
 ): PlaybackBackend {
 	let widget: SC.WidgetInstance | null = null;
-	let iframeEl: HTMLIFrameElement | null = null;
 	let cachedPosition = 0;
 	let cachedDuration = 0;
 	let lastUpdateTime = 0;
@@ -56,7 +55,6 @@ export function createSoundCloudBackend(
 
 			const embedUrl = `https://w.soundcloud.com/player/?url=${encodeURIComponent(source)}&auto_play=false&show_artwork=false`;
 			const iframe = createFreshIframe(embedUrl);
-			iframeEl = iframe;
 
 			return new Promise((resolve, reject) => {
 				const timeout = setTimeout(() => reject(new Error('SoundCloud load timeout')), 15000);
@@ -142,7 +140,6 @@ export function createSoundCloudBackend(
 				widget = null;
 			}
 			containerEl.innerHTML = '';
-			iframeEl = null;
 			cachedPosition = 0;
 			cachedDuration = 0;
 			lastUpdateTime = 0;

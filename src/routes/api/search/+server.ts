@@ -1,6 +1,12 @@
+import { checkRateLimit } from '$lib/server/RateLimiter';
 import { json, error } from '@sveltejs/kit';
 
-export async function GET({ url, fetch }) {
+export async function GET({ url, fetch, getClientAddress }) {
+	const rateLimit = checkRateLimit(`search:${getClientAddress()}`, 30, 60 * 1000);
+	if (!rateLimit.allowed) {
+		throw error(429, 'Too many requests');
+	}
+
 	const q = url.searchParams.get('q');
 
 	if (!q) {

@@ -1,18 +1,7 @@
-// FORMATTING:
-// Example usage from ShowResults.svelte, for future reference use formatLyrics when submitting
-//
-// function setUserPick(getSynced: boolean, item: any) {
-// 	item.plainLyrics = formatLyrics(item?.plainLyrics);
-// 	item.syncedLyrics = formatLyrics(item?.syncedLyrics);
-// 	userPick = item;
-// 	getSyncedLyrics = getSynced;
-// }
 import {
 	getSharedArtist,
 	getSharedAlbum,
-	getSharedDuration,
 	getSharedTrack,
-	getSharedLyrics,
 	setSharedTrackData
 } from './SharedData.svelte';
 
@@ -24,7 +13,7 @@ export function formatSharedData() {
 	setSharedTrackData({ track, artist, album });
 }
 
-export function formatLyrics(lyrics: string): string {
+export function formatLyrics(lyrics: string | null | undefined): string {
 	if (lyrics) {
 		return removeEmptyLyrics(removeTimestampSpace(removeSectionMarkers(removeEmptyLines(lyrics))));
 	}
@@ -49,7 +38,7 @@ export function validatePayload(payload: {
 	}
 
 	if (!payload.albumName || payload.albumName.trim() === '') {
-  // Instead just keep it empty ig
+		// Instead just keep it empty ig
 		//payload.albumName = payload.trackName;
 		// If no albumName given, use trackName. Seems like that's what other's are doing looking on lrclib.net
 	}
@@ -60,8 +49,7 @@ export function validatePayload(payload: {
 
 	if (!payload.syncedLyrics) {
 		errors.push('Lyrics are required');
-	}
-	else if (!validateLyrics(payload.syncedLyrics)) {
+	} else if (!validateLyrics(payload.syncedLyrics)) {
 		payload.syncedLyrics = '';
 		//errors.push('All lyrics must be synced');
 	}
@@ -127,7 +115,6 @@ function removeEmptyLyrics(lyrics: string): string {
 // Remove all spaces between ] and first character
 function removeTimestampSpace(lyrics: string): string {
 	return lyrics.replace(/(\[\d{2}:\d{2}\.\d{2}\])\s*/g, '$1 '); // Replaces all the whitespaces with singular one instead for better readability
-	//return lyrics.replace(/(\[\d{2}:\d{2}\.\d{2}\])\s+/g, '$1'); // Only removes white spaces directly after pattern [mm:ss.xx] since some lyrics could have ] char
 }
 
 function removeSectionMarkers(lyrics: string): string {

@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { getSharedSearchResults, shared } from './SharedData.svelte';
 
-	let { showResults = $bindable() }: { result: any; showResults: boolean } = $props();
+	// eslint-disable-next-line no-useless-assignment
+	let { showResults = $bindable() }: { showResults: boolean } = $props();
 
 	let isSearching = $state<boolean>(false);
 
@@ -12,7 +13,7 @@
 		if (input == '') return;
 
 		isSearching = true;
-		const response = await fetch(`/api/search?q=${input}`);
+		const response = await fetch(`/api/search?${new URLSearchParams({ q: input })}`);
 		shared.searchResultData = await response.json();
 		isSearching = false;
 		setShowResults();

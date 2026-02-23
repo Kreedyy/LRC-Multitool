@@ -2,14 +2,13 @@
 	import LyricBox from '$lib/assets/LyricBox.svelte';
 	import LyricSearch from '$lib/assets/LyricSearch.svelte';
 	import ShowResults from '$lib/assets/ShowResults.svelte';
-	import { getSharedLyrics } from '$lib/assets/SharedData.svelte';
+	import { getSharedLyrics, type LrcLibTrack } from '$lib/assets/SharedData.svelte';
 
-	let result = $state<any>();
-	let userPick = $state<any>();
+	let result = $state<LrcLibTrack[]>();
+	let userPick = $state<LrcLibTrack | undefined>();
 	let getSyncedLyrics = $state<boolean>(true);
 	let showResults = $state<boolean>(false);
-	let lyrics = $state<string>();
-	lyrics = getSharedLyrics();
+	let lyrics = $state<string>(getSharedLyrics());
 </script>
 
 <div>

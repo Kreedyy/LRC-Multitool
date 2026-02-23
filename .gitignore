@@ -9,6 +9,7 @@ node_modules
 /build
 /rust
 
+
 # OS
 .DS_Store
 Thumbs.db

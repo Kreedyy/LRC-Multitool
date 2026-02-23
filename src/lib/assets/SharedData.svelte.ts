@@ -1,4 +1,14 @@
-export let shared = $state<{
+export interface LrcLibTrack {
+	id: number;
+	trackName: string;
+	artistName: string;
+	albumName: string;
+	duration: number;
+	plainLyrics: string | null;
+	syncedLyrics: string | null;
+}
+
+type SharedState = {
 	artist: string;
 	track: string;
 	album: string;
@@ -6,8 +16,10 @@ export let shared = $state<{
 	lyrics: string;
 	currentTime: number;
 	seekRequest: { play: boolean; time: number } | null;
-	searchResultData?: any;
-}>({
+	searchResultData?: LrcLibTrack[];
+};
+
+export let shared = $state<SharedState>({
 	artist: '',
 	track: '',
 	album: '',
@@ -41,38 +53,7 @@ export function setSharedTrackData({
 	lyrics && (shared.lyrics = lyrics);
 }
 
-// In case you rather use object for these
-export function getSharedTrackData(
-	...fields: (
-		| 'artist'
-		| 'track'
-		| 'album'
-		| 'duration'
-		| 'lyrics'
-		| 'currentTime'
-		| 'searchResultData'
-	)[]
-) {
-	if (fields.length === 0) {
-		return {
-			artist: shared.artist,
-			track: shared.track,
-			album: shared.album,
-			duration: shared.duration,
-			lyrics: shared.lyrics,
-			currentTime: shared.currentTime,
-			searchResultData: shared.searchResultData
-		};
-	}
-
-	const result: any = {};
-	fields.forEach((field) => {
-		result[field] = shared[field];
-	});
-	return result;
-}
-
-export function getSharedSearchResults(): any {
+export function getSharedSearchResults(): LrcLibTrack[] | undefined {
 	return shared.searchResultData;
 }
 

@@ -1,7 +1,12 @@
 import { convertSyncedToPlainLyrics, validatePayload } from '$lib/assets/FormatLyrics.js';
+import { checkRateLimit } from '$lib/server/RateLimiter';
 import { json, type RequestHandler, error } from '@sveltejs/kit';
 
-export const POST: RequestHandler = async ({ request, fetch }) => {
+export const POST: RequestHandler = async ({ request, fetch, getClientAddress }) => {
+	const rateLimit = checkRateLimit(`post:${getClientAddress()}`, 5, 60 * 1000);
+	if (!rateLimit.allowed) {
+		throw error(429, 'Too many requests');
+	}
 	try {
 		const body = await request.json();
 		const { publishToken, ...lyricData } = body;
@@ -54,6 +59,6 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
 		if (err && typeof err === 'object' && 'status' in err) {
 			throw err;
 		}
-		throw error(500, 'Server error: ' + (err as Error).message);
+		throw error(500, 'An unexpected error occurred');
 	}
 };

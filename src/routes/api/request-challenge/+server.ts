@@ -1,6 +1,12 @@
+import { checkRateLimit } from '$lib/server/RateLimiter';
 import { json, error } from '@sveltejs/kit';
 
-export async function POST({ fetch }) {
+export async function POST({ fetch, getClientAddress }) {
+	const rateLimit = checkRateLimit(`challenge:${getClientAddress()}`, 10, 60 * 1000);
+	if (!rateLimit.allowed) {
+		throw error(429, 'Too many requests');
+	}
+
 	try {
 		const challengeResponse = await fetch('https://lrclib.net/api/request-challenge', {
 			method: 'POST'
@@ -16,6 +22,6 @@ export async function POST({ fetch }) {
 		if (err && typeof err === 'object' && 'status' in err) {
 			throw err;
 		}
-		throw error(500, 'Server error: ' + (err as Error).message);
+		throw error(500, 'An unexpected error occurred');
 	}
 }

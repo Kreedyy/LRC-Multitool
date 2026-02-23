@@ -10,7 +10,7 @@
 	import LyricBox from '$lib/assets/LyricBox.svelte';
 	import { onMount } from 'svelte';
 
-	let wasmModule: any = null;
+	let wasmModule: typeof import('$lib/wasm/lrclib_challenge_solver') | null = null;
 	let wasmLoaded = $state(false);
 
 	onMount(async () => {
@@ -121,7 +121,7 @@
 				throw new Error(errorData.message || 'Publish failed');
 			}
 
-			const data = await publishResponse.json();
+			await publishResponse.json();
 			success = true;
 			progress = '';
 		} catch (err) {

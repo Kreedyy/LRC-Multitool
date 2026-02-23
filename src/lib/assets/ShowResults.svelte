@@ -1,23 +1,29 @@
 <script lang="ts">
 	import { formatLyrics } from '$lib/assets/FormatLyrics';
-	import { getSharedSearchResults, setSharedTrackData } from './SharedData.svelte';
+	import {
+		getSharedSearchResults,
+		setSharedTrackData,
+		type LrcLibTrack
+	} from './SharedData.svelte';
 
-	let result = $derived<any>(getSharedSearchResults());
+	let result = $derived(getSharedSearchResults());
 
 	type Props = {
-		userPick: any;
+		userPick: LrcLibTrack | undefined;
 		getSyncedLyrics: boolean;
 		showResults: boolean;
 	};
+	/* eslint-disable no-useless-assignment */
 	let {
 		userPick = $bindable(),
 		getSyncedLyrics = $bindable(),
 		showResults = $bindable()
 	}: Props = $props();
+	/* eslint-enable no-useless-assignment */
 
 	let resultsContainer = $state<HTMLDivElement>();
 
-	function setUserPick(getSynced: boolean, item: any) {
+	function setUserPick(getSynced: boolean, item: LrcLibTrack) {
 		showResults = false;
 		item.plainLyrics = formatLyrics(item?.plainLyrics);
 		item.syncedLyrics = formatLyrics(item?.syncedLyrics);
