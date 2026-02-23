@@ -130,10 +130,6 @@
 		transition: all var(--transition);
 	}
 
-	:global(button:hover:not(:disabled)) {
-		background-color: var(--brand-500);
-		color: var(--neutral-700);
-	}
 
 	:global(button:disabled) {
 		opacity: 0.4;

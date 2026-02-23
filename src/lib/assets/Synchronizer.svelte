@@ -85,16 +85,7 @@
 		background-color: var(--brand-500);
 	}
 
-	button:focus,
-	button:hover,
-	button:active {
-		background-color: var(--brand-500);
-		color: var(--neutral-450);
-	}
-	.line-container.active p,
-	button:focus p,
-	button:hover p,
-	button:active p {
+	.line-container.active p {
 		color: var(--neutral-450);
 	}
 	.main-container {
