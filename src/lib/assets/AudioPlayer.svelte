@@ -318,7 +318,7 @@
 	.controls {
 		display: flex;
 		align-items: center;
-		gap: 2rem;
+		gap: 1rem;
 	}
 
 	.icon-btn {
