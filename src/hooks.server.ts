@@ -1,3 +1,4 @@
+import { dev } from '$app/environment';
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -10,8 +11,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			"script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.youtube.com https://w.soundcloud.com https://static.cloudflareinsights.com",
 			"style-src 'self' 'unsafe-inline'",
 			'frame-src https://www.youtube.com https://w.soundcloud.com',
-			'connect-src',
-			"'self' https://lrclib.net",
+			`connect-src 'self' https://lrclib.net${dev ? ' ws://localhost:5173' : ''}`,
 			"font-src 'self'",
 			"media-src 'self' blob:",
 			"object-src 'none'",
