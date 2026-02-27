@@ -21,7 +21,8 @@
 			wasmLoaded = true;
 		} catch (err) {
 			console.error('Failed to load WASM module:', err);
-			error = 'Failed to load challenge solver. Try refreshing the page, or open an issue on GitHub.';
+			error =
+				'Failed to load challenge solver. Try refreshing the page, or open an issue on GitHub.';
 		}
 	});
 
