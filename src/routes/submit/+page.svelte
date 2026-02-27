@@ -177,9 +177,9 @@
 		</div>
 		<LyricBox bind:lyrics />
 
-		{#if !wasmLoaded && !error}
+		<!--{#if !wasmLoaded && !error}
 			<div class="info">Loading challenge solver...</div>
-		{/if}
+		{/if}-->
 
 		{#if progress}
 			<div class="info">
