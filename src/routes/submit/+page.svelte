@@ -10,7 +10,7 @@
 	import LyricBox from '$lib/assets/LyricBox.svelte';
 	import { onMount } from 'svelte';
 
-	let wasmModule: typeof import('$lib/wasm/lrclib_challenge_solver') | null = null;
+	let wasmModule: typeof import('$lib/wasm/lrclib_challenge_solver');
 	let wasmLoaded = $state(false);
 
 	onMount(async () => {
@@ -19,10 +19,9 @@
 			await wasm.default();
 			wasmModule = wasm;
 			wasmLoaded = true;
-			console.log('WASM challenge solver loaded');
 		} catch (err) {
 			console.error('Failed to load WASM module:', err);
-			error = 'Failed to load challenge solver. Please refresh the page.';
+			error = 'Failed to load challenge solver. Try refreshing the page, or open an issue on GitHub.';
 		}
 	});
 
@@ -178,7 +177,7 @@
 		</div>
 		<LyricBox bind:lyrics />
 
-		{#if !wasmLoaded}
+		{#if !wasmLoaded && !error}
 			<div class="info">Loading challenge solver...</div>
 		{/if}
 
