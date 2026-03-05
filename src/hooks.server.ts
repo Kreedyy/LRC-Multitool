@@ -12,6 +12,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			"style-src 'self' 'unsafe-inline'",
 			'frame-src https://www.youtube.com https://w.soundcloud.com',
 			`connect-src 'self' https://lrclib.net${dev ? ' ws://localhost:5173' : ''}`,
+			"img-src 'self' data:",
 			"font-src 'self'",
 			"media-src 'self' blob:",
 			"object-src 'none'",
