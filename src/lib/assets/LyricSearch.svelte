@@ -11,11 +11,13 @@
 	async function search(input: string) {
 		input = input.trim().slice(0, maxChars);
 		if (input == '') return;
-
-		isSearching = true;
-		const response = await fetch(`/api/search?${new URLSearchParams({ q: input })}`);
-		shared.searchResultData = await response.json();
-		isSearching = false;
+		if (input != userSearchPrevious) {
+			userSearchPrevious = input;
+			isSearching = true;
+			const response = await fetch(`/api/search?${new URLSearchParams({ q: input })}`);
+			shared.searchResultData = await response.json();
+			isSearching = false;
+		}
 		setShowResults();
 	}
 
@@ -26,6 +28,7 @@
 	}
 
 	let userSearch = $state<string>('');
+	let userSearchPrevious = $state<string>('');
 </script>
 
 <div class="search-container">
