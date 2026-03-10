@@ -94,13 +94,12 @@
 <style>
 	.results-container {
 		position: absolute;
-		top: 167px;
+		top: 185px;
 		height: calc(100% - 316px);
 		width: 90%;
 		max-width: fit-content;
 		display: flex;
 		flex-direction: column;
-		padding: 1rem;
 		overflow: hidden;
 	}
 
@@ -218,15 +217,21 @@
 
 	@media only screen and (max-width: 800px) {
 		.results-container {
-			top: 153px;
-			height: calc(100% - 331px);
+			/* top: 153px; */
+			height: calc(100% - 350px);
+		}
+	}
+	@media only screen and (max-width: 500px) {
+		.results-container {
+			top: 180px;
+			height: calc(100% - 380px);
 		}
 	}
 
 	@media only screen and (max-width: 400px) {
 		.results-container {
-			top: 164px;
-			height: calc(100% - 317px);
+			top: 170px;
+			height: calc(100% - 370px);
 		}
 
 		.result-card {
