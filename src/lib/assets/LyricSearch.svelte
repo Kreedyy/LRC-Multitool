@@ -7,16 +7,33 @@
 	let isSearching = $state<boolean>(false);
 
 	let maxChars: number = 50;
+	let searchAbortController: AbortController | null = null;
 
 	async function search(input: string) {
 		input = input.trim().slice(0, maxChars);
-		if (input == '') return;
-		if (input != userSearchPrevious) {
+		if (input === '') return;
+		if (input !== userSearchPrevious) {
+			searchAbortController?.abort();
+			const controller = new AbortController();
+			searchAbortController = controller;
+
 			userSearchPrevious = input;
 			isSearching = true;
-			const response = await fetch(`/api/search?${new URLSearchParams({ q: input })}`);
-			shared.searchResultData = await response.json();
-			isSearching = false;
+			try {
+				const response = await fetch(`/api/search?${new URLSearchParams({ q: input })}`, {
+					signal: controller.signal
+				});
+				if (response.ok) {
+					shared.searchResultData = await response.json();
+				}
+			} catch (e) {
+				if (e instanceof DOMException && e.name === 'AbortError') return;
+				userSearchPrevious = '';
+			} finally {
+				if (!controller.signal.aborted) {
+					isSearching = false;
+				}
+			}
 		}
 		setShowResults();
 	}

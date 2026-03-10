@@ -37,9 +37,7 @@
 			duration = d;
 			setSharedTrackData({ duration: Math.round(d) });
 		},
-		onError: (msg: string) => {
-			console.error('Playback error:', msg);
-		}
+		onError: () => {}
 	};
 
 	async function loadSource(source: string, isFile: boolean = false): Promise<void> {
@@ -72,9 +70,9 @@
 			if (actualRate !== speed) {
 				speed = actualRate;
 			}
-		} catch (err) {
-			console.error('Failed to load source:', err);
+		} catch {
 			backend = null;
+			speedDisabled = true;
 		}
 	}
 

@@ -19,7 +19,7 @@
 	function parseTimestamp(ts: string): number {
 		const match = ts.match(/^\[(\d{2}):(\d{2})\.(\d{2})\]/);
 		if (!match) return -1;
-		return parseInt(match[1]) * 60 + parseInt(match[2]) + parseInt(match[3]) / 100;
+		return parseInt(match[1], 10) * 60 + parseInt(match[2], 10) + parseInt(match[3], 10) / 100;
 	}
 
 	function setActiveLyrics() {
@@ -50,7 +50,7 @@
 				onclick={() => skipToLyrics(index)}
 			>
 				<div class="current-time-container">
-					{#if index == selectedIndex}
+					{#if index === selectedIndex}
 						<p class="timestamp">{formatTime(currentTime)} ></p>
 					{/if}
 				</div>

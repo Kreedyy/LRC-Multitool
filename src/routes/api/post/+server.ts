@@ -15,11 +15,16 @@ export const POST: RequestHandler = async ({ request, fetch, getClientAddress })
 			throw error(400, 'Publish token is required');
 		}
 
+		const duration = Number(lyricData.duration);
+		if (isNaN(duration) || duration < 0) {
+			throw error(400, 'Invalid duration');
+		}
+
 		const payload = {
 			trackName: lyricData.track,
 			artistName: lyricData.artist,
 			albumName: lyricData.album,
-			duration: Number(lyricData.duration),
+			duration,
 			plainLyrics: convertSyncedToPlainLyrics(lyricData.lyrics),
 			syncedLyrics: lyricData.lyrics
 		};

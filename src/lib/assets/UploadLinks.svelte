@@ -36,13 +36,23 @@
 	function getAudioDuration(url: string): Promise<number> {
 		return new Promise((resolve, reject) => {
 			const audio = new Audio();
-			audio.src = url;
-			audio.addEventListener('loadedmetadata', () => {
-				resolve(audio.duration);
-			});
-			audio.addEventListener('error', (e) => {
+			function cleanup() {
+				audio.src = '';
+				audio.removeEventListener('loadedmetadata', onLoaded);
+				audio.removeEventListener('error', onError);
+			}
+			function onLoaded() {
+				const d = audio.duration;
+				cleanup();
+				resolve(d);
+			}
+			function onError(e: Event) {
+				cleanup();
 				reject(e);
-			});
+			}
+			audio.addEventListener('loadedmetadata', onLoaded);
+			audio.addEventListener('error', onError);
+			audio.src = url;
 		});
 	}
 

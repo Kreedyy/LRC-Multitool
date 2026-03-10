@@ -4,6 +4,7 @@
 
 	let fileInput: HTMLInputElement;
 	let isDragging = $state<boolean>(false);
+	let fileError = $state('');
 
 	function handleFileSelect(event: Event): void {
 		const target = event.target as HTMLInputElement;
@@ -32,10 +33,11 @@
 
 	function processFile(file: File): void {
 		if (file.type.startsWith('audio/')) {
+			fileError = '';
 			onfileselect(file);
 			onclose();
 		} else {
-			alert('Please select an audio file');
+			fileError = 'Please select an audio file.';
 		}
 	}
 
@@ -73,6 +75,9 @@
 	<p class="title">Drop your audio file here</p>
 	<p class="subtitle">or click to browse</p>
 </div>
+{#if fileError}
+	<p class="file-error" role="alert">{fileError}</p>
+{/if}
 
 <style>
 	.dropzone {
@@ -122,5 +127,12 @@
 		font-size: 0.8125rem;
 		color: var(--neutral-200);
 		margin: 0;
+	}
+
+	.file-error {
+		color: var(--error);
+		font-size: 0.875rem;
+		margin: 0.5rem 0 0;
+		text-align: center;
 	}
 </style>

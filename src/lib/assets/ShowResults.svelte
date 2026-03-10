@@ -25,14 +25,18 @@
 
 	function setUserPick(getSynced: boolean, item: LrcLibTrack) {
 		showResults = false;
-		item.plainLyrics = formatLyrics(item?.plainLyrics);
-		item.syncedLyrics = formatLyrics(item?.syncedLyrics);
-		userPick = item;
-		let artist: string = userPick.artistName;
-		let album: string = userPick.albumName;
-		let track: string = userPick.trackName;
-		let duration: number = userPick.duration;
-		setSharedTrackData({ artist: artist, album: album, track: track, duration: duration });
+		const pick: LrcLibTrack = {
+			...item,
+			plainLyrics: formatLyrics(item.plainLyrics),
+			syncedLyrics: formatLyrics(item.syncedLyrics)
+		};
+		userPick = pick;
+		setSharedTrackData({
+			artist: pick.artistName,
+			album: pick.albumName,
+			track: pick.trackName,
+			duration: pick.duration
+		});
 		getSyncedLyrics = getSynced;
 	}
 

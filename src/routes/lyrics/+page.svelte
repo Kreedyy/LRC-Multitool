@@ -4,7 +4,6 @@
 	import ShowResults from '$lib/assets/ShowResults.svelte';
 	import { getSharedLyrics, type LrcLibTrack } from '$lib/assets/SharedData.svelte';
 
-	let result = $state<LrcLibTrack[]>();
 	let userPick = $state<LrcLibTrack | undefined>();
 	let getSyncedLyrics = $state<boolean>(true);
 	let showResults = $state<boolean>(false);
@@ -13,9 +12,9 @@
 
 <div>
 	<!--Fetch results and assign to data-->
-	<LyricSearch bind:result bind:showResults />
+	<LyricSearch bind:showResults />
 	<!--Showcase of results from data and handles user pick-->
-	<ShowResults bind:userPick bind:getSyncedLyrics bind:result bind:showResults />
+	<ShowResults bind:userPick bind:getSyncedLyrics bind:showResults />
 	<!--Processes user pick by filling textarea with lyrics-->
 	<LyricBox bind:userPick bind:getSyncedLyrics bind:lyrics />
 	<a href="/submit">Submitting to LRCLIB</a>

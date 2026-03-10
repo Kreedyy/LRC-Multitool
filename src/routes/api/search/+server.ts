@@ -21,6 +21,11 @@ export async function GET({ url, fetch, getClientAddress }) {
 	apiUrl.searchParams.set('q', q);
 
 	const response = await fetch(apiUrl);
+
+	if (!response.ok) {
+		throw error(response.status, 'Search failed');
+	}
+
 	const data = await response.json();
 
 	return json(data);

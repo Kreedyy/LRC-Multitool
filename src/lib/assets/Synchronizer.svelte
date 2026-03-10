@@ -47,7 +47,7 @@
 				onclick={() => setSelectedIndex(index)}
 			>
 				<div class="current-time-container">
-					{#if index == selectedIndex}
+					{#if index === selectedIndex}
 						<p class="timestamp">{formatTime(currentTime)} ></p>
 					{/if}
 				</div>

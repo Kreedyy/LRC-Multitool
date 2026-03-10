@@ -45,12 +45,12 @@ export function setSharedTrackData({
 	lyrics?: string;
 	currentTime?: number;
 } = {}) {
-	artist && (shared.artist = artist);
-	track && (shared.track = track);
-	album && (shared.album = album);
-	duration && (shared.duration = duration);
-	currentTime && (shared.currentTime = currentTime);
-	lyrics && (shared.lyrics = lyrics);
+	if (artist !== undefined) shared.artist = artist;
+	if (track !== undefined) shared.track = track;
+	if (album !== undefined) shared.album = album;
+	if (duration !== undefined) shared.duration = duration;
+	if (currentTime !== undefined) shared.currentTime = currentTime;
+	if (lyrics !== undefined) shared.lyrics = lyrics;
 }
 
 export function getSharedSearchResults(): LrcLibTrack[] | undefined {

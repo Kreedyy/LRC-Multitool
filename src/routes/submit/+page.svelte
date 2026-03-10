@@ -19,10 +19,9 @@
 			await wasm.default();
 			wasmModule = wasm;
 			wasmLoaded = true;
-		} catch (err) {
-			console.error('Failed to load WASM module:', err);
+		} catch {
 			error =
-				'Failed to load challenge solver. Try refreshing the page, or open an issue on GitHub.';
+				'Failed to load challenge solver. Try refreshing the page, or open an issue on GitHub. https://github.com/Kreedyy/LRC-Multitool';
 		}
 	});
 
@@ -78,7 +77,6 @@
 
 			const { prefix, target } = await challengeResponse.json();
 
-			// Solve challenge using WASM (client-side), way faster than using js
 			progress = 'Solving challenge (this may take a moment)...';
 			solvingChallenge = true;
 

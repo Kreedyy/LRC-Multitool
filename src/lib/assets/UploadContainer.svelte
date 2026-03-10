@@ -15,16 +15,10 @@
 	let activeTab = $state<'files' | 'links'>('files');
 </script>
 
-<div
-	class="overlay"
-	onclick={onclose}
-	onkeydown={(e) => e.key === 'Escape' && onclose()}
-	role="button"
-	tabindex="0"
-></div>
-<div class="modal">
+<div class="overlay" onclick={onclose} aria-hidden="true"></div>
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="upload-modal-title">
 	<div class="header">
-		<h3>Upload Audio</h3>
+		<h3 id="upload-modal-title">Upload Audio</h3>
 		<button class="close-btn" title="Close" onclick={onclose}>
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
 				<path

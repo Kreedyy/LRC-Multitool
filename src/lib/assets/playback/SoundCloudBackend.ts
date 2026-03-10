@@ -85,6 +85,7 @@ export function createSoundCloudBackend(
 					});
 					widget.bind('error', () => callbacks.onError('SoundCloud playback error'));
 					widget.bind('playProgress', (data: unknown) => {
+						if (typeof data !== 'object' || data === null || !('currentPosition' in data)) return;
 						const progress = data as { currentPosition: number };
 						cachedPosition = progress.currentPosition / 1000;
 						lastUpdateTime = performance.now();

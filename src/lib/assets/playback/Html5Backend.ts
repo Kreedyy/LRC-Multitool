@@ -3,10 +3,15 @@ import type { PlaybackBackend, BackendCallbacks } from './Types';
 export function createHtml5Backend(callbacks: BackendCallbacks): PlaybackBackend {
 	const audio = new Audio();
 
-	audio.addEventListener('play', () => callbacks.onPlay());
-	audio.addEventListener('pause', () => callbacks.onPause());
-	audio.addEventListener('ended', () => callbacks.onEnded());
-	audio.addEventListener('error', () => callbacks.onError('Failed to load audio file'));
+	const onPlay = () => callbacks.onPlay();
+	const onPause = () => callbacks.onPause();
+	const onEnded = () => callbacks.onEnded();
+	const onError = () => callbacks.onError('Failed to load audio file');
+
+	audio.addEventListener('play', onPlay);
+	audio.addEventListener('pause', onPause);
+	audio.addEventListener('ended', onEnded);
+	audio.addEventListener('error', onError);
 
 	return {
 		type: 'html5',
@@ -32,7 +37,7 @@ export function createHtml5Backend(callbacks: BackendCallbacks): PlaybackBackend
 		},
 
 		play() {
-			audio.play();
+			void audio.play();
 		},
 
 		pause() {
@@ -62,6 +67,10 @@ export function createHtml5Backend(callbacks: BackendCallbacks): PlaybackBackend
 
 		destroy() {
 			audio.pause();
+			audio.removeEventListener('play', onPlay);
+			audio.removeEventListener('pause', onPause);
+			audio.removeEventListener('ended', onEnded);
+			audio.removeEventListener('error', onError);
 			audio.removeAttribute('src');
 			audio.load();
 		}

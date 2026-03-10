@@ -22,30 +22,32 @@
 	let containerElement: HTMLDivElement;
 	let thumbPosition = $state<number>(0);
 	let fillWidth = $state<number>(0);
+	let containerWidth = $state<number>(0);
 
-	function updatePositions(): void {
-		if (!containerElement || !inputElement) return;
+	$effect(() => {
+		if (!containerElement) return;
+		containerWidth = containerElement.offsetWidth;
+		const observer = new ResizeObserver((entries) => {
+			containerWidth = entries[0].contentRect.width;
+		});
+		observer.observe(containerElement);
+		return () => observer.disconnect();
+	});
 
+	$effect(() => {
 		const percentage = max - min !== 0 ? (value - min) / (max - min) : 0;
-		const containerWidth = containerElement.offsetWidth;
 		const thumbWidth = 12;
-
 		thumbPosition = percentage * (containerWidth - thumbWidth);
 		fillWidth = percentage * containerWidth;
-	}
+	});
 
 	function handleInput(event: Event): void {
 		const input = event.target as HTMLInputElement;
 		value = parseFloat(input.value);
-		updatePositions();
 		if (oninput) {
 			oninput(event);
 		}
 	}
-
-	$effect(() => {
-		updatePositions();
-	});
 </script>
 
 <div class="range-container {className}" bind:this={containerElement}>

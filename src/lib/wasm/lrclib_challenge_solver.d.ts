@@ -1,3 +1,6 @@
+/* tslint:disable */
+/* eslint-disable */
+
 /**
  * Solve the proof-of-work challenge by finding a nonce that produces a hash
  * below the target difficulty. This is the WASM-exported function that can be
@@ -33,15 +36,20 @@ export interface InitOutput {
 export type SyncInitInput = BufferSource | WebAssembly.Module;
 
 /**
- * @param {{ module: SyncInitInput }} module
+ * Instantiates the given `module`, which can either be bytes or
+ * a precompiled `WebAssembly.Module`.
+ *
+ * @param {{ module: SyncInitInput }} module - Passing `SyncInitInput` directly is deprecated.
  *
  * @returns {InitOutput}
  */
 export function initSync(module: { module: SyncInitInput } | SyncInitInput): InitOutput;
 
-/*
+/**
+ * If `module_or_path` is {RequestInfo} or {URL}, makes a request and
+ * for everything else, calls `WebAssembly.instantiate` directly.
  *
- * @param {{ module_or_path: InitInput | Promise<InitInput> }} module_or_path
+ * @param {{ module_or_path: InitInput | Promise<InitInput> }} module_or_path - Passing `InitInput` directly is deprecated.
  *
  * @returns {Promise<InitOutput>}
  */
