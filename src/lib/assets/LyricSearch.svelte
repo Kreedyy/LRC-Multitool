@@ -22,7 +22,8 @@
 	}
 
 	function setShowResults() {
-		if (getSharedSearchResults() && getSharedSearchResults().length > 0) {
+		const results = getSharedSearchResults();
+		if (results && results.length > 0) {
 			showResults = true;
 		}
 	}
