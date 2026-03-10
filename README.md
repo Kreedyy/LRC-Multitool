@@ -4,14 +4,10 @@ Web-based tool for creating, editing and syncing lyrics with integrated audio pl
 
 ## Features
 
-- Lyrics editing, syncing & automatic formatting
-- Functionality with [LRCLIB](https://lrclib.net/)'s API (Searching & Submitting Lyrics)
-- Upload audio via local files, direct link, YouTube link or SoundCloud link to use while syncing
-
-## TODO
-
+- [x] Lyrics editing, syncing & automatic formatting
+- [x] Functionality with [LRCLIB](https://lrclib.net/)'s API (Searching & Submitting Lyrics)
+- [x] Upload audio via local files, direct link, YouTube link or SoundCloud link to use while syncing
 - [ ] Center active lyrics in visualizer
-- [ ] Implement api/get and api/get-cached in case ppl rather use dat instead of search
 
 ## Prerequisites
 
@@ -25,10 +21,14 @@ Install dependencies
 bun install
 ```
 
-# Formatting
+# Formatting & Linting
 
 ```sh
 bun run format
+```
+
+```sh
+bun run lint
 ```
 
 # Development
