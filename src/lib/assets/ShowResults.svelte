@@ -48,7 +48,8 @@
 		if (
 			resultsContainer &&
 			!resultsContainer.contains(e.target as HTMLElement) &&
-			!document.getElementById('searchInput')?.contains(e.target as HTMLElement)
+			!document.getElementById('searchInput')?.contains(e.target as HTMLElement) &&
+			!document.getElementById('searchButton')?.contains(e.target as HTMLElement)
 		) {
 			showResults = false;
 		}

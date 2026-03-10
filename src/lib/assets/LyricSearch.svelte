@@ -43,7 +43,12 @@
 			onkeydown={(e) => e.key === 'Enter' && search(userSearch)}
 			onclick={setShowResults}
 		/>
-		<button title="Search" onclick={() => search(userSearch)} disabled={isSearching}>
+		<button
+			id="searchButton"
+			title="Search"
+			onclick={() => search(userSearch)}
+			disabled={isSearching}
+		>
 			{#if isSearching}
 				<span class="spinner"></span>
 			{:else}
