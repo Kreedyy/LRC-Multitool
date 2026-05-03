@@ -5,7 +5,7 @@ Web-based tool for creating, editing and syncing lyrics with integrated audio pl
 ## Features
 
 - [x] Lyrics editing, syncing & automatic formatting
-- [x] Functionality with [LRCLIB](https://lrclib.net/)'s API (Searching & Submitting Lyrics)
+- [x] Functionality with [LRCLIB](https://lrclib.net/)'s API (Searching & Submitting Lyrics) (Why is LRCLIB hiding results when searching for artist? and only showing said results if searching for song/album? Open issue upstream?)
 - [ ] Word-by-word lyrics syncing similar to LRCGET >=v.2.0.0 through their [Lyricsfile](https://github.com/tranxuanthang/lrclib/issues/8#issuecomment-4291600384) extension (YAML format)
 - [x] Upload audio via local files, direct link, YouTube link or SoundCloud link to use while syncing
 - [ ] Center active lyrics in visualizer
