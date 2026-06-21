@@ -1,5 +1,11 @@
-<a href="https://kreedy.dev" class="logo">
-	<span class="brand">Kreedy</span><span class="dev">.dev</span>
+<script lang="ts">
+  import { page } from '$app/state';
+
+  const tld = $derived(page.url.hostname.split('.').pop());
+</script>
+
+<a href="https://kreedy.{tld}" class="logo">
+	<span class="brand">Kreedy</span><span class="dev">.{tld}</span>
 </a>
 
 <style>
