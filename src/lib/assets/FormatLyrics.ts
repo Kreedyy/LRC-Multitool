@@ -37,11 +37,7 @@ export function validatePayload(payload: {
 		errors.push('Artist name is required');
 	}
 
-	if (!payload.albumName || payload.albumName.trim() === '') {
-		// Instead just keep it empty ig
-		//payload.albumName = payload.trackName;
-		// If no albumName given, use trackName. Seems like that's what other's are doing looking on lrclib.net
-	}
+	if (!payload.albumName || payload.albumName.trim() === '')
 
 	if (!payload.duration || payload.duration <= 0) {
 		errors.push('Duration must be greater than 0');
