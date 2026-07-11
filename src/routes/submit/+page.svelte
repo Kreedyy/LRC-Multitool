@@ -183,9 +183,9 @@
 		{#if progress}
 			<div class="info">
 				{progress}
-				{#if solvingChallenge}
+				<!--{#if solvingChallenge}
 					<div class="spinner"></div>
-				{/if}
+				{/if}-->
 			</div>
 		{/if}
 
